@@ -1,0 +1,805 @@
+							;
+							;	Disassembled by:
+							;		DASMx object code disassembler
+							;		(c) Copyright 1996-2003   Conquest Consultants
+							;		Version 1.40 (Oct 18 2003)
+							;
+							;	File:		/home/frank/08-8h.bin
+							;
+							;	Size:		1024 bytes
+							;	Checksum:	52DC
+							;	CRC-32:		F3B4FFDE
+							;
+							;	Date:		Wed Oct 26 11:44:07 2022
+							;
+							;	CPU:		Signetics 2650 (2650 family)
+							;
+							;
+							;
+								org	H'0000'
+							;
+0000 : 1F 00 EF			    "   "	[3]		bcta,un	L00EF
+0003 : 1F 20 00			    "   "	[3]		bcta,un	L2000
+							;
+0006 : 00			    " "				db	H'00'
+							;
+0007 : 8B 00			    "  "	[3]		addr,r3	X0009
+0009							X0009:
+0009 : AB 00			    "  "	[3]		subr,r3	X000B
+000B							X000B:
+000B : B9 00			    "  "	[3]		bsfr,gt	L000D
+000D							L000D:
+000D : CE 00 DC			    "   "	[4]		stra,r2	X00DC
+							;
+0010							X0010:
+0010 : 00 7A			    " z"			dw	L007A
+0012 : 00			    " "				db	H'00'
+							;
+0013							L0013:
+0013 : 9C 00 C8			    "   "	[3]		bcfa,eq	L00C8
+							;
+0016 : 00			    " "				db	H'00'
+							;
+0017 : 82			    " "		[2]		addz	r2
+							;
+0018 : 00			    " "				db	H'00'
+							;
+0019 : 35			    "5"		[3]		rete,gt
+							;
+001A : 00			    " "				db	H'00'
+							;
+001B : 3E 00 47			    "> G"	[3]		bsta,lt	L0047
+							;
+001E : 00			    " "				db	H'00'
+							;
+001F : 4A 00			    "J "	[3]		andr,r2	X0021
+0021							X0021:
+0021 : 50			    "P"		[2]		rrr,r0
+							;
+0022 : 00			    " "				db	H'00'
+							;
+0023 : 57 00			    "W "	[3]		rede,r3	H'00'
+0025 : 5E 00 67			    "^ g"	[3]		brna,r2	L0067
+							;
+0028 : 00			    " "				db	H'00'
+							;
+0029 : 6E 00 73			    "n s"	[4]		iora,r2	X0073
+							;
+002C							X002C:
+002C : 00 2E			    " ."			dw	L002E
+							;
+002E							L002E:
+002E : CD 1C 47			    "  G"	[4]		stra,r1	X1C47
+0031 : CE 1C 48			    "  H"	[4]		stra,r2	X1C48
+0034 : 17			    " "		[3]		retc,un
+							;
+0035 : 0D 7D 37			    " }7"	[4]		loda,r0	X1D37,r1
+0038 : C3			    " "		[2]		strz	r3
+0039 : 0F 73 5E			    " s^"	[4]		loda,r0	X135E,r3
+003C : C3			    " "		[2]		strz	r3
+003D : 17			    " "		[3]		retc,un
+							;
+003E : 0F 7D 37			    " }7"	[4]		loda,r0	X1D37,r3
+0041 : C3			    " "		[2]		strz	r3
+0042 : 0F 73 63			    " sc"	[4]		loda,r0	X1363,r3
+0045 : C3			    " "		[2]		strz	r3
+0046 : 17			    " "		[3]		retc,un
+							;
+0047							L0047:
+0047 : 0F 7D 37			    " }7"	[4]		loda,r0	X1D37,r3
+004A : C3			    " "		[2]		strz	r3
+004B : 0F 73 59			    " sY"	[4]		loda,r0	X1359,r3
+004E : C3			    " "		[2]		strz	r3
+004F : 17			    " "		[3]		retc,un
+							;
+0050 : 0D 1C 59			    "  Y"	[4]		loda,r1	X1C59
+0053 : 0E 1C 5A			    "  Z"	[4]		loda,r2	X1C5A
+0056 : 17			    " "		[3]		retc,un
+							;
+0057 : 0C 1D 88			    "   "	[4]		loda,r0	X1D88
+005A : 8C 1D 89			    "   "	[4]		adda,r0	X1D89
+005D : 17			    " "		[3]		retc,un
+							;
+005E : 0D 7D 37			    " }7"	[4]		loda,r0	X1D37,r1
+0061 : C3			    " "		[2]		strz	r3
+0062 : 0F 73 68			    " sh"	[4]		loda,r0	X1368,r3
+0065 : C3			    " "		[2]		strz	r3
+0066 : 17			    " "		[3]		retc,un
+							;
+0067							L0067:
+0067 : CD 1C 95			    "   "	[4]		stra,r1	X1C95
+006A : CE 1C 96			    "   "	[4]		stra,r2	X1C96
+006D : 17			    " "		[3]		retc,un
+							;
+006E : 09 F8			    "  "	[3]		lodr,r1	*X0068
+0070 : 0A F9			    "  "	[3]		lodr,r2	*X006B
+0072 : 17			    " "		[3]		retc,un
+							;
+0073							X0073:
+0073 : 0D 1D 9F			    "   "	[4]		loda,r1	X1D9F
+0076 : 0E 1D A0			    "   "	[4]		loda,r2	X1DA0
+0079 : 17			    " "		[3]		retc,un
+							;
+007A							L007A:
+007A : 20			    " "		[2]		eorz	r0
+007B : C1			    " "		[2]		strz	r1
+007C							L007C:
+007C : CD 54 00			    " T "	[4]		stra,r0	X1400,r1,-
+007F : 59 7B			    "Y{"	[3]		brnr,r1	L007C
+0081 : 17			    " "		[3]		retc,un
+							;
+0082 : 06 0A			    "  "	[2]		lodi,r2	H'0A'
+0084 : CC 1D 8C			    "   "	[4]		stra,r0	X1D8C
+0087 : CD 1D 8D			    "   "	[4]		stra,r1	X1D8D
+008A : 17			    " "		[3]		retc,un
+							;
+008B : 05 0A			    "  "	[2]		lodi,r1	H'0A'
+008D : CE 15 1E			    "   "	[4]		stra,r2	X151E
+0090 : CF 15 1F			    "   "	[4]		stra,r3	X151F
+0093							L0093:
+0093 : 0D D5 1E			    "   "	[4]		loda,r0	*X151E,r1,-
+0096 : CD 75 20			    " u "	[4]		stra,r0	X1520,r1
+0099 : 59 78			    "Yx"	[3]		brnr,r1	L0093
+009B : 17			    " "		[3]		retc,un
+							;
+009C : 05 0A			    "  "	[2]		lodi,r1	H'0A'
+009E : CA EE			    "  "	[3]		strr,r2	*X008E
+00A0 : CB EF			    "  "	[3]		strr,r3	*X0091
+00A2							L00A2:
+00A2 : 0D D5 1E			    "   "	[4]		loda,r0	*X151E,r1,-
+00A5 : CD 75 40			    " u@"	[4]		stra,r0	X1540,r1
+00A8 : 59 78			    "Yx"	[3]		brnr,r1	L00A2
+00AA : 17			    " "		[3]		retc,un
+							;
+00AB : 0C 15 51			    "  Q"	[4]		loda,r0	X1551
+00AE : 44 F8			    "D "	[2]		andi,r0	H'F8'
+00B0 : 64 08			    "d "	[2]		iori,r0	H'08'
+00B2 : 61			    "a"		[2]		iorz	r1
+00B3 : C8 F7			    "  "	[3]		strr,r0	*X00AC
+00B5 : CC 15 C6			    "   "	[4]		stra,r0	X15C6
+00B8 : 17			    " "		[3]		retc,un
+							;
+00B9 : D1			    " "		[2]		rrl,r1
+00BA : D1			    " "		[2]		rrl,r1
+00BB : D1			    " "		[2]		rrl,r1
+00BC : 0C 15 50			    "  P"	[4]		loda,r0	X1550
+00BF : 44 07			    "D "	[2]		andi,r0	H'07'
+00C1							L00C1:
+00C1 : 61			    "a"		[2]		iorz	r1
+00C2 : C8 F9			    "  "	[3]		strr,r0	*X00BD
+00C4 : CC 15 C2			    "   "	[4]		stra,r0	X15C2
+00C7 : 17			    " "		[3]		retc,un
+							;
+00C8							L00C8:
+00C8 : 08 F3			    "  "	[3]		lodr,r0	*X00BD
+00CA : 44 F8			    "D "	[2]		andi,r0	H'F8'
+00CC : 1B 73			    " s"	[3]		bctr,un	L00C1
+							;
+00CE							L00CE:
+00CE : 20			    " "		[2]		eorz	r0
+00CF : C1			    " "		[2]		strz	r1
+00D0							L00D0:
+00D0 : CD 55 00			    " U "	[4]		stra,r0	X1500,r1,-
+00D3 : CD 76 00			    " v "	[4]		stra,r0	X1600,r1
+00D6 : CD 77 00			    " w "	[4]		stra,r0	X1700,r1
+00D9 : 59 75			    "Yu"	[3]		brnr,r1	L00D0
+00DB : 17			    " "		[3]		retc,un
+							;
+00DC							L00DC:
+00DC							X00DC:
+00DC : 04 3F			    " ?"	[2]		lodi,r0	H'3F'
+00DE : 05 00			    "  "	[2]		lodi,r1	H'00'
+00E0							L00E0:
+00E0 : CD 58 00			    " X "	[4]		stra,r0	X1800,r1,-
+00E3 : CD 79 00			    " y "	[4]		stra,r0	X1900,r1
+00E6 : CD 7A 00			    " z "	[4]		stra,r0	X1A00,r1
+00E9 : CD 7B 00			    " { "	[4]		stra,r0	X1B00,r1
+00EC : 59 72			    "Yr"	[3]		brnr,r1	L00E0
+00EE : 17			    " "		[3]		retc,un
+							;
+00EF							L00EF:				; RESET jumps here
+00EF : 04 20			    "  "	[2]		lodi,r0	H'20'
+00F1 : 92			    " "		[2]		lpsu
+00F2 : 20			    " "		[2]		eorz	r0
+00F3 : 93			    " "		[2]		lpsl
+00F4 : 77 02			    "w "	[3]		ppsl	H'02'
+00F6 : CC 1C 91			    "   "	[4]		stra,r0	X1C91
+00F9							L00F9:
+00F9 : BB 90			    "  "	[3]		zbsr	*X0010						;INFO: indirect jump
+00FB : BB 8C			    "  "	[3]		zbsr	*X000C						;INFO: indirect jump
+00FD : 76 40			    "v@"	[3]		ppsu	H'40'
+00FF : BB 8E			    "  "	[3]		zbsr	*X000E						;INFO: indirect jump
+0101 : 0B F4			    "  "	[3]		lodr,r3	*X00F7
+0103 : 20			    " "		[2]		eorz	r0
+0104 : C1			    " "		[2]		strz	r1
+0105							L0105:
+0105 : CD 5C 00			    " \ "	[4]		stra,r0	X1C00,r1,-
+0108 : CD 7D 00			    " } "	[4]		stra,r0	X1D00,r1
+010B : CD 7E 00			    " ~ "	[4]		stra,r0	X1E00,r1
+010E : CD 7F 00			    "   "	[4]		stra,r0	X1F00,r1
+0111 : 59 72			    "Yr"	[3]		brnr,r1	L0105
+0113 : CB E2			    "  "	[3]		strr,r3	*X00F7
+0115 : CC 1C 92			    "   "	[4]		stra,r0	X1C92
+0118 : CC 1C 93			    "   "	[4]		stra,r0	X1C93
+011B : B0			    " "		[2]		wrtc,r0
+011C : F0			    " "		[2]		wrtd,r0
+011D : 04 FF			    "  "	[2]		lodi,r0	H'FF'
+011F : CC 15 C8			    "   "	[4]		stra,r0	X15C8
+0122 : CC 15 C9			    "   "	[4]		stra,r0	X15C9
+0125 : CC 16 C8			    "   "	[4]		stra,r0	X16C8
+0128 : CC 16 C9			    "   "	[4]		stra,r0	X16C9
+012B : CC 17 C8			    "   "	[4]		stra,r0	X17C8
+012E : CC 17 C9			    "   "	[4]		stra,r0	X17C9
+0131 : D4 00			    "  "	[3]		wrte,r0	H'00'
+0133 : CC 15 2A			    "  *"	[4]		stra,r0	X152A
+0136 : 04 FE			    "  "	[2]		lodi,r0	H'FE'
+0138 : CC 15 0D			    "   "	[4]		stra,r0	X150D
+013B : CC 15 1D			    "   "	[4]		stra,r0	X151D
+013E : CC 15 2D			    "  -"	[4]		stra,r0	X152D
+0141 : CC 15 4D			    "  M"	[4]		stra,r0	X154D
+0144 : 04 14			    "  "	[2]		lodi,r0	H'14'
+0146 : CC 1C 84			    "   "	[4]		stra,r0	X1C84
+0149 : 04 08			    "  "	[2]		lodi,r0	H'08'
+014B : CC 1C 00			    "   "	[4]		stra,r0	X1C00
+014E : 20			    " "		[2]		eorz	r0
+014F : CC 1D 86			    "   "	[4]		stra,r0	X1D86
+0152 : CC 1C 88			    "   "	[4]		stra,r0	X1C88
+0155 : 84 01			    "  "	[2]		addi,r0	H'01'
+0157 : CC 1C 87			    "   "	[4]		stra,r0	X1C87
+015A : 84 01			    "  "	[2]		addi,r0	H'01'
+015C : CC 1C 8A			    "   "	[4]		stra,r0	X1C8A
+015F : 84 01			    "  "	[2]		addi,r0	H'01'
+0161 : CC 1C 89			    "   "	[4]		stra,r0	X1C89
+0164 : CC 1C 4A			    "  J"	[4]		stra,r0	X1C4A
+0167 : 04 18			    "  "	[2]		lodi,r0	H'18'
+0169 : CC 1D 06			    "   "	[4]		stra,r0	X1D06
+016C : 04 82			    "  "	[2]		lodi,r0	H'82'
+016E : CC 1D 07			    "   "	[4]		stra,r0	X1D07
+0171 : 04 03			    "  "	[2]		lodi,r0	H'03'
+0173 : CC 1D 05			    "   "	[4]		stra,r0	X1D05
+0176 : 0C 1C 91			    "   "	[4]		loda,r0	X1C91
+0179 : 84 01			    "  "	[2]		addi,r0	H'01'
+017B : C8 FA			    "  "	[3]		strr,r0	*X0177
+017D : E4 55			    " U"	[2]		comi,r0	H'55'
+017F : 9C 00 F9			    "   "	[3]		bcfa,eq	L00F9
+0182 : 20			    " "		[2]		eorz	r0
+0183 : 74 40			    "t@"	[3]		cpsu	H'40'
+0185 : 3F 00 E0			    "?  "	[3]		bsta,un	L00E0
+0188 : 04 20			    "  "	[2]		lodi,r0	H'20'
+018A : CC 1C 93			    "   "	[4]		stra,r0	X1C93
+018D : B0			    " "		[2]		wrtc,r0
+018E : 3F 01 DA			    "?  "	[3]		bsta,un	L01DA
+0191 : 04 18			    "  "	[2]		lodi,r0	H'18'
+0193 : CC 1C 49			    "  I"	[4]		stra,r0	X1C49
+0196 : CC 1C 59			    "  Y"	[4]		stra,r0	X1C59
+0199 : 04 CC			    "  "	[2]		lodi,r0	H'CC'
+019B : CC 1C 5A			    "  Z"	[4]		stra,r0	X1C5A
+019E : 04 01			    "  "	[2]		lodi,r0	H'01'
+01A0 : CC 1D 46			    "  F"	[4]		stra,r0	X1D46
+01A3 : 04 02			    "  "	[2]		lodi,r0	H'02'
+01A5 : CC 1D 55			    "  U"	[4]		stra,r0	X1D55
+01A8 : 04 03			    "  "	[2]		lodi,r0	H'03'
+01AA : CC 1D 64			    "  d"	[4]		stra,r0	X1D64
+01AD : 04 04			    "  "	[2]		lodi,r0	H'04'
+01AF : CC 1D 73			    "  s"	[4]		stra,r0	X1D73
+01B2 : 3F 33 99			    "?3 "	[3]		bsta,un	L3399
+01B5 : 04 01			    "  "	[2]		lodi,r0	H'01'
+01B7 : CC 1C 9E			    "   "	[4]		stra,r0	X1C9E
+01BA : 04 80			    "  "	[2]		lodi,r0	H'80'
+01BC : CC 1C 00			    "   "	[4]		stra,r0	X1C00
+01BF : 04 13			    "  "	[2]		lodi,r0	H'13'
+01C1 : CC 1D 23			    "  #"	[4]		stra,r0	X1D23
+01C4 : 04 65			    " e"	[2]		lodi,r0	H'65'
+01C6 : CC 1C 03			    "   "	[4]		stra,r0	X1C03
+01C9 : 74 20			    "t "	[3]		cpsu	H'20'
+01CB : 1F 02 7C			    "  |"	[3]		bcta,un	L027C
+							;
+01CE							L01CE:
+01CE : BB AC			    "  "	[3]		zbsr	*X002C						;INFO: indirect jump
+01D0 : CC 9C 47			    "  G"	[4]		stra,r0	*X1C47
+01D3 : 77 09			    "w "	[3]		ppsl	H'09'
+01D5 : A6 20			    "  "	[2]		subi,r2	H'20'
+01D7 : 1F 09 C8			    "   "	[3]		bcta,un	L09C8
+							;
+01DA							L01DA:
+01DA : 76 40			    "v@"	[3]		ppsu	H'40'
+01DC : 07 1E			    "  "	[2]		lodi,r3	H'1E'
+01DE : 05 1B			    "  "	[2]		lodi,r1	H'1B'
+01E0 : 06 E0			    "  "	[2]		lodi,r2	H'E0'
+01E2							L01E2:
+01E2 : 0F 44 2B			    " D+"	[4]		loda,r0	X042B,r3,-
+01E5 : 3B 67			    ";g"	[3]		bstr,un	L01CE
+01E7 : 5B 79			    "[y"	[3]		brnr,r3	L01E2
+01E9 : 07 1E			    "  "	[2]		lodi,r3	H'1E'
+01EB : 05 1B			    "  "	[2]		lodi,r1	H'1B'
+01ED : 06 E2			    "  "	[2]		lodi,r2	H'E2'
+01EF							L01EF:
+01EF : 0F 44 49			    " DI"	[4]		loda,r0	X0449,r3,-
+01F2 : 3B 5A			    ";Z"	[3]		bstr,un	L01CE
+01F4 : 5B 79			    "[y"	[3]		brnr,r3	L01EF
+01F6 : 04 3E			    " >"	[2]		lodi,r0	H'3E'
+01F8 : 07 03			    "  "	[2]		lodi,r3	H'03'
+01FA : 05 1B			    "  "	[2]		lodi,r1	H'1B'
+01FC : 06 E1			    "  "	[2]		lodi,r2	H'E1'
+01FE : 3F 02 72			    "? r"	[3]		bsta,un	L0272
+0201 : 07 02			    "  "	[2]		lodi,r3	H'02'
+0203 : 05 18			    "  "	[2]		lodi,r1	H'18'
+0205 : 06 61			    " a"	[2]		lodi,r2	H'61'
+0207 : 3F 02 72			    "? r"	[3]		bsta,un	L0272
+020A : 74 40			    "t@"	[3]		cpsu	H'40'
+020C : 06 E7			    "  "	[2]		lodi,r2	H'E7'
+020E : 04 01			    "  "	[2]		lodi,r0	H'01'
+0210 : 3B 30			    ";0"	[3]		bstr,un	L0242
+0212 : 06 E8			    "  "	[2]		lodi,r2	H'E8'
+0214 : 04 01			    "  "	[2]		lodi,r0	H'01'
+0216 : 3B 2A			    ";*"	[3]		bstr,un	L0242
+0218 : 06 E9			    "  "	[2]		lodi,r2	H'E9'
+021A : 04 03			    "  "	[2]		lodi,r0	H'03'
+021C : 3B 24			    ";$"	[3]		bstr,un	L0242
+021E : 06 EA			    "  "	[2]		lodi,r2	H'EA'
+0220 : 04 03			    "  "	[2]		lodi,r0	H'03'
+0222 : 3B 1E			    "; "	[3]		bstr,un	L0242
+0224 : 06 EB			    "  "	[2]		lodi,r2	H'EB'
+0226 : 04 03			    "  "	[2]		lodi,r0	H'03'
+0228 : 3B 18			    "; "	[3]		bstr,un	L0242
+022A : 06 EC			    "  "	[2]		lodi,r2	H'EC'
+022C : 04 03			    "  "	[2]		lodi,r0	H'03'
+022E : 3B 12			    "; "	[3]		bstr,un	L0242
+0230 : 06 E0			    "  "	[2]		lodi,r2	H'E0'
+0232 : 04 03			    "  "	[2]		lodi,r0	H'03'
+0234 : 3B 0C			    "; "	[3]		bstr,un	L0242
+0236 : 06 E3			    "  "	[2]		lodi,r2	H'E3'
+0238 : 3B 08			    "; "	[3]		bstr,un	L0242
+023A : 04 01			    "  "	[2]		lodi,r0	H'01'
+023C : 06 E1			    "  "	[2]		lodi,r2	H'E1'
+023E : 3B 02			    "; "	[3]		bstr,un	L0242
+0240 : 1B 14			    "  "	[3]		bctr,un	L0256
+							;
+0242							L0242:
+0242 : 05 1B			    "  "	[2]		lodi,r1	H'1B'
+0244 : 07 1E			    "  "	[2]		lodi,r3	H'1E'
+0246							L0246:
+0246 : BB AC			    "  "	[3]		zbsr	*X002C						;INFO: indirect jump
+0248 : CC 9C 47			    "  G"	[4]		stra,r0	*X1C47
+024B : 77 09			    "w "	[3]		ppsl	H'09'
+024D : A6 20			    "  "	[2]		subi,r2	H'20'
+024F : A5 00			    "  "	[2]		subi,r1	H'00'
+0251 : 75 08			    "u "	[3]		cpsl	H'08'
+0253 : FB 71			    " q"	[3]		bdrr,r3	L0246
+0255 : 17			    " "		[3]		retc,un
+							;
+0256							L0256:
+0256 : 04 00			    "  "	[2]		lodi,r0	H'00'
+0258 : 07 03			    "  "	[2]		lodi,r3	H'03'
+025A : 05 1B			    "  "	[2]		lodi,r1	H'1B'
+025C : 06 E1			    "  "	[2]		lodi,r2	H'E1'
+025E : 3B 12			    "; "	[3]		bstr,un	L0272
+0260 : 07 03			    "  "	[2]		lodi,r3	H'03'
+0262 : 06 E2			    "  "	[2]		lodi,r2	H'E2'
+0264 : 3B 0C			    "; "	[3]		bstr,un	L0272
+0266 : 07 02			    "  "	[2]		lodi,r3	H'02'
+0268 : 05 18			    "  "	[2]		lodi,r1	H'18'
+026A : 06 61			    " a"	[2]		lodi,r2	H'61'
+026C : 3B 04			    "; "	[3]		bstr,un	L0272
+026E : 07 02			    "  "	[2]		lodi,r3	H'02'
+0270 : 06 62			    " b"	[2]		lodi,r2	H'62'
+0272							L0272:
+0272 : BB AC			    "  "	[3]		zbsr	*X002C						;INFO: indirect jump
+0274 : CC 9C 47			    "  G"	[4]		stra,r0	*X1C47
+0277 : A6 20			    "  "	[2]		subi,r2	H'20'
+0279 : FB 77			    " w"	[3]		bdrr,r3	L0272
+027B : 17			    " "		[3]		retc,un
+							;
+027C							L027C:
+027C : 0C 1C 04			    "   "	[4]		loda,r0	X1C04
+027F : 18 7B			    " {"	[3]		bctr,eq	L027C
+0281 : 3F 28 45			    "?(E"	[3]		bsta,un	L2845
+0284 : 3F 08 37			    "? 7"	[3]		bsta,un	L0837
+0287 : 3F 2A F2			    "?* "	[3]		bsta,un	L2AF2
+028A : 3F 22 F5			    "?" "	[3]		bsta,un	L22F5
+028D : 0C 1C 00			    "   "	[4]		loda,r0	X1C00
+0290 : F4 08			    "  "	[3]		tmi,r0	H'08'
+0292 : 1A 05			    "  "	[3]		bctr,lt	L0299
+0294 : 3F 21 2A			    "?!*"	[3]		bsta,un	L212A
+0297 : 1B 34			    " 4"	[3]		bctr,un	L02CD
+							;
+0299							L0299:
+0299 : 3F 06 8A			    "?  "	[3]		bsta,un	L068A
+029C : 09 F0			    "  "	[3]		lodr,r1	*X028E
+029E : 45 01			    "E "	[2]		andi,r1	H'01'
+02A0 : 0D 7D 94			    " } "	[4]		loda,r0	X1D94,r1
+02A3 : C1			    " "		[2]		strz	r1
+02A4 : 0C 1D 13			    "   "	[4]		loda,r0	X1D13
+02A7 : ED 62 DD			    " b "	[4]		coma,r0	X02DD,r1
+02AA : 1A 06			    "  "	[3]		bctr,lt	L02B2
+02AC : 20			    " "		[2]		eorz	r0
+02AD : C8 F6			    "  "	[3]		strr,r0	*X02A5
+02AF : 3F 27 11			    "?' "	[3]		bsta,un	L2711
+02B2							L02B2:
+02B2 : 3F 11 1E			    "?  "	[3]		bsta,un	L111E
+02B5 : 08 D7			    "  "	[3]		lodr,r0	*X028E
+02B7 : F4 40			    " @"	[3]		tmi,r0	H'40'
+02B9 : 18 0C			    "  "	[3]		bctr,eq	L02C7
+02BB : 3F 03 2E			    "? ."	[3]		bsta,un	L032E
+02BE : 3F 23 A4			    "?# "	[3]		bsta,un	L23A4
+02C1 : 3F 09 EF			    "?  "	[3]		bsta,un	L09EF
+02C4 : 3F 11 64			    "? d"	[3]		bsta,un	L1164
+02C7							L02C7:
+02C7 : 3F 26 12			    "?& "	[3]		bsta,un	L2612
+02CA : 3F 13 26			    "? &"	[3]		bsta,un	L1326
+02CD							L02CD:
+02CD : 3F 27 B7			    "?' "	[3]		bsta,un	L27B7
+02D0 : 3F 23 DD			    "?# "	[3]		bsta,un	L23DD
+02D3 : 3F 20 84			    "?  "	[3]		bsta,un	L2084
+02D6 : 20			    " "		[2]		eorz	r0
+02D7 : CC 1C 04			    "   "	[4]		stra,r0	X1C04
+02DA : 1F 02 7C			    "  |"	[3]		bcta,un	L027C
+							;
+02DD							X02DD:
+02DD : 0A 07			    "  "	[3]		lodr,r2	X02E6
+02DF : 05 03			    "  "	[2]		lodi,r1	H'03'
+02E1 : 76 40			    "v@"	[3]		ppsu	H'40'
+02E3 : 05 39			    " 9"	[2]		lodi,r1	H'39'
+02E5							L02E5:
+02E5 : 0D 7C 0B			    " | "	[4]		loda,r0	X1C0B,r1
+02E8 : 18 1B			    "  "	[3]		bctr,eq	L0305
+02EA : C8 A3			    "  "	[3]		strr,r0	*X030F
+02EC : 0D 7C 0C			    " | "	[4]		loda,r0	X1C0C,r1
+02EF : C8 A4			    "  "	[3]		strr,r0	*X0315
+02F1 : 0D 7C 0D			    " | "	[4]		loda,r0	X1C0D,r1
+02F4 : CC 9C 47			    "  G"	[4]		stra,r0	*X1C47
+02F7 : 20			    " "		[2]		eorz	r0
+02F8 : CD 7C 0B			    " | "	[4]		stra,r0	X1C0B,r1
+02FB : CD 7C 0C			    " | "	[4]		stra,r0	X1C0C,r1
+02FE : CD 7C 0D			    " | "	[4]		stra,r0	X1C0D,r1
+0301 : A5 03			    "  "	[2]		subi,r1	H'03'
+0303 : 9A 60			    " `"	[3]		bcfr,lt	L02E5
+0305							L0305:
+0305 : 74 40			    "t@"	[3]		cpsu	H'40'
+0307 : 05 21			    " !"	[2]		lodi,r1	H'21'
+0309							L0309:
+0309 : 0D 7C 9F			    " | "	[4]		loda,r0	X1C9F,r1
+030C : 18 1D			    "  "	[3]		bctr,eq	L032B
+030E : CC 1C 47			    "  G"	[4]		stra,r0	X1C47
+0311 : 0D 7C A0			    " | "	[4]		loda,r0	X1CA0,r1
+0314 : CC 1C 48			    "  H"	[4]		stra,r0	X1C48
+0317 : 0D 7C A1			    " | "	[4]		loda,r0	X1CA1,r1
+031A : CC 9C 47			    "  G"	[4]		stra,r0	*X1C47
+031D : 20			    " "		[2]		eorz	r0
+031E : CD 7C 9F			    " | "	[4]		stra,r0	X1C9F,r1
+0321 : CD 7C A0			    " | "	[4]		stra,r0	X1CA0,r1
+0324 : CD 7C A1			    " | "	[4]		stra,r0	X1CA1,r1
+0327 : A5 03			    "  "	[2]		subi,r1	H'03'
+0329 : 9A 5E			    " ^"	[3]		bcfr,lt	L0309
+032B							L032B:
+032B : 76 40			    "v@"	[3]		ppsu	H'40'
+032D : 17			    " "		[3]		retc,un
+							;
+032E							L032E:
+032E : 3F 2D 6A			    "?-j"	[3]		bsta,un	L2D6A
+0331 : 98 06			    "  "	[3]		bcfr,eq	L0339
+0333 : 0C 1C 03			    "   "	[4]		loda,r0	X1C03
+0336 : F4 40			    " @"	[3]		tmi,r0	H'40'
+0338 : 14			    " "		[3]		retc,eq
+0339							L0339:
+0339 : 0C 1C 00			    "   "	[4]		loda,r0	X1C00
+033C : F4 08			    "  "	[3]		tmi,r0	H'08'
+033E : 14			    " "		[3]		retc,eq
+033F : 0F 1C 86			    "   "	[4]		loda,r3	X1C86
+0342 : E7 06			    "  "	[2]		comi,r3	H'06'
+0344 : 1D 03 9B			    "   "	[3]		bcta,gt	L039B
+0347							L0347:
+0347 : 0F 1C 85			    "   "	[4]		loda,r3	X1C85
+034A : 0F 7C 87			    " | "	[4]		loda,r0	X1C87,r3
+034D : F4 01			    "  "	[3]		tmi,r0	H'01'
+034F : 1C 03 B3			    "   "	[3]		bcta,eq	L03B3
+0352 : E4 02			    "  "	[2]		comi,r0	H'02'
+0354 : 1C 03 BD			    "   "	[3]		bcta,eq	L03BD
+0357 : CF 1C 50			    "  P"	[4]		stra,r3	X1C50
+035A : 04 03			    "  "	[2]		lodi,r0	H'03'
+035C : CC 1C 51			    "  Q"	[4]		stra,r0	X1C51
+035F : 04 02			    "  "	[2]		lodi,r0	H'02'
+0361 : CC 1C 52			    "  R"	[4]		stra,r0	X1C52
+0364							L0364:
+0364 : D3			    " "		[2]		rrl,r3
+0365 : 04 14			    "  "	[2]		lodi,r0	H'14'
+0367 : A3			    " "		[2]		subz	r3
+0368 : C1			    " "		[2]		strz	r1
+0369 : 0D 5C 5C			    " \\"	[4]		loda,r0	X1C5C,r1,-
+036C : 09 9D			    "  "	[3]		lodr,r1	*X038B
+036E : 18 03			    "  "	[3]		bctr,eq	L0373
+0370							L0370:
+0370 : 50			    "P"		[2]		rrr,r0
+0371 : F9 7D			    " }"	[3]		bdrr,r1	L0370
+0373							L0373:
+0373 : F4 01			    "  "	[3]		tmi,r0	H'01'
+0375 : 1A 0A			    "  "	[3]		bctr,lt	L0381
+0377 : D3			    " "		[2]		rrl,r3
+0378 : CB 84			    "  "	[3]		strr,r3	*X037E
+037A : 3F 03 C9			    "?  "	[3]		bsta,un	L03C9
+037D : 0F 1C 53			    "  S"	[4]		loda,r3	X1C53
+0380 : 53			    "S"		[2]		rrr,r3
+0381							L0381:
+0381 : 53			    "S"		[2]		rrr,r3
+0382 : 87 04			    "  "	[2]		addi,r3	H'04'
+0384 : E7 09			    "  "	[2]		comi,r3	H'09'
+0386 : 19 02			    "  "	[3]		bctr,gt	L038A
+0388 : 1B 5A			    " Z"	[3]		bctr,un	L0364
+							;
+038A							L038A:
+038A : 0C 1C 86			    "   "	[4]		loda,r0	X1C86
+038D : 84 01			    "  "	[2]		addi,r0	H'01'
+038F : C8 FA			    "  "	[3]		strr,r0	*X038B
+0391 : E4 02			    "  "	[2]		comi,r0	H'02'
+0393 : 18 83			    "  "	[3]		bctr,eq	*X0398						;INFO: indirect jump
+0395 : E4 05			    "  "	[2]		comi,r0	H'05'
+0397 : 1C 03 47			    "  G"	[3]		bcta,eq	L0347
+039A : 17			    " "		[3]		retc,un
+							;
+039B							L039B:
+039B : 20			    " "		[2]		eorz	r0
+039C : C8 ED			    "  "	[3]		strr,r0	*X038B
+039E : 0D 1C 85			    "   "	[4]		loda,r1	X1C85
+03A1 : 0D 7C 87			    " | "	[4]		loda,r0	X1C87,r1
+03A4 : 84 01			    "  "	[2]		addi,r0	H'01'
+03A6 : 44 03			    "D "	[2]		andi,r0	H'03'
+03A8 : CD 7C 87			    " | "	[4]		stra,r0	X1C87,r1
+03AB : 85 01			    "  "	[2]		addi,r1	H'01'
+03AD : 45 03			    "E "	[2]		andi,r1	H'03'
+03AF : C9 EE			    "  "	[3]		strr,r1	*X039F
+03B1 : 1B E5			    "  "	[3]		bctr,un	*X0398						;INFO: indirect jump
+							;
+03B3							L03B3:
+03B3 : 04 01			    "  "	[2]		lodi,r0	H'01'
+03B5 : CC 1C 51			    "  Q"	[4]		stra,r0	X1C51
+03B8 : 20			    " "		[2]		eorz	r0
+03B9 : C8 89			    "  "	[3]		strr,r0	*X03C4
+03BB : 1B 8A			    "  "	[3]		bctr,un	*X03C7						;INFO: indirect jump
+							;
+03BD							L03BD:
+03BD : 04 05			    "  "	[2]		lodi,r0	H'05'
+03BF : C8 F5			    "  "	[3]		strr,r0	*X03B6
+03C1 : 04 04			    "  "	[2]		lodi,r0	H'04'
+03C3 : CC 1C 52			    "  R"	[4]		stra,r0	X1C52
+03C6 : 1F 03 64			    "  d"	[3]		bcta,un	L0364
+							;
+03C9							L03C9:
+03C9 : 0F 63 FF			    " c "	[4]		loda,r0	X03FF,r3
+03CC : C1			    " "		[2]		strz	r1
+03CD : 0F 64 00			    " d "	[4]		loda,r0	X0400,r3
+03D0 : A8 99			    "  "	[3]		subr,r0	*X03EB
+03D2 : C2			    " "		[2]		strz	r2
+03D3 : 0B 96			    "  "	[3]		lodr,r3	*X03EB
+03D5 : 0F 63 F8			    " c "	[4]		loda,r0	X03F8,r3
+03D8 : 68 DC			    "h "	[3]		iorr,r0	*X03B6
+03DA : 3F 24 32			    "?$2"	[3]		bsta,un	L2432
+03DD : E4 FF			    "  "	[2]		comi,r0	H'FF'
+03DF : 14			    " "		[3]		retc,eq
+03E0 : 0F 1C 53			    "  S"	[4]		loda,r3	X1C53
+03E3 : 0F 64 01			    " d "	[4]		loda,r0	X0401,r3
+03E6 : C1			    " "		[2]		strz	r1
+03E7 : 0F 64 02			    " d "	[4]		loda,r0	X0402,r3
+03EA : AC 1C 86			    "   "	[4]		suba,r0	X1C86
+03ED : C2			    " "		[2]		strz	r2
+03EE : 0B FB			    "  "	[3]		lodr,r3	*X03EB
+03F0 : 0F 63 F8			    " c "	[4]		loda,r0	X03F8,r3
+03F3 : 6C 1C 52			    "l R"	[4]		iora,r0	X1C52
+03F6 : 1B E3			    "  "	[3]		bctr,un	*X03DB						;INFO: indirect jump
+							;
+03F8							X03F8:
+03F8 : 00 10			    "  "			db	H'00', H'10'
+							;
+03FA : 20			    " "		[2]		eorz	r0
+							;
+03FB : 00 10			    "  "			db	H'00', H'10'
+							;
+03FD : 20			    " "		[2]		eorz	r0
+							;
+03FE : 00			    " "				db	H'00'
+03FF							X03FF:
+03FF : 18			    " "				db	H'18'
+
+;--------------------------------------------------------------
+Symbol table
+============
+
+Value		Type	Name
+-----		----	----
+0009		Data	X0009
+000B		Data	X000B
+000C		Data	X000C
+000D		Code	L000D
+000E		Data	X000E
+0010		Data	X0010
+0013		Code	L0013
+0021		Data	X0021
+002C		Data	X002C
+002E		Code	L002E
+0047		Code	L0047
+0067		Code	L0067
+0068		Data	X0068
+006B		Data	X006B
+0073		Data	X0073
+007A		Code	L007A
+007C		Code	L007C
+008E		Data	X008E
+0091		Data	X0091
+0093		Code	L0093
+00A2		Code	L00A2
+00AC		Data	X00AC
+00BD		Data	X00BD
+00C1		Code	L00C1
+00C8		Code	L00C8
+00CE		Code	L00CE
+00D0		Code	L00D0
+00DC		Data	X00DC
+00DC		Code	L00DC
+00E0		Code	L00E0
+00EF		Code	L00EF
+00F7		Data	X00F7
+00F9		Code	L00F9
+0105		Code	L0105
+0177		Data	X0177
+01CE		Code	L01CE
+01DA		Code	L01DA
+01E2		Code	L01E2
+01EF		Code	L01EF
+0242		Code	L0242
+0246		Code	L0246
+0256		Code	L0256
+0272		Code	L0272
+027C		Code	L027C
+028E		Data	X028E
+0299		Code	L0299
+02A5		Data	X02A5
+02B2		Code	L02B2
+02C7		Code	L02C7
+02CD		Code	L02CD
+02DD		Data	X02DD
+02E5		Code	L02E5
+02E6		Data	X02E6
+0305		Code	L0305
+0309		Code	L0309
+030F		Data	X030F
+0315		Data	X0315
+032B		Code	L032B
+032E		Code	L032E
+0339		Code	L0339
+0347		Code	L0347
+0364		Code	L0364
+0370		Code	L0370
+0373		Code	L0373
+037E		Data	X037E
+0381		Code	L0381
+038A		Code	L038A
+038B		Data	X038B
+0398		Data	X0398
+039B		Code	L039B
+039F		Data	X039F
+03B3		Code	L03B3
+03B6		Data	X03B6
+03BD		Code	L03BD
+03C4		Data	X03C4
+03C7		Data	X03C7
+03C9		Code	L03C9
+03DB		Data	X03DB
+03EB		Data	X03EB
+03F8		Data	X03F8
+03FF		Data	X03FF
+0400		Data	X0400
+0401		Data	X0401
+0402		Data	X0402
+042B		Data	X042B
+0449		Data	X0449
+068A		Code	L068A
+0837		Code	L0837
+09C8		Code	L09C8
+09EF		Code	L09EF
+0D1C		Data	X0D1C
+111E		Code	L111E
+1164		Code	L1164
+1326		Code	L1326
+1359		Data	X1359
+135E		Data	X135E
+1363		Data	X1363
+1368		Data	X1368
+1400		Data	X1400
+1500		Data	X1500
+150D		Data	X150D
+151D		Data	X151D
+151E		Data	X151E
+151F		Data	X151F
+1520		Data	X1520
+152A		Data	X152A
+152D		Data	X152D
+1540		Data	X1540
+154D		Data	X154D
+1550		Data	X1550
+1551		Data	X1551
+15C2		Data	X15C2
+15C6		Data	X15C6
+15C8		Data	X15C8
+15C9		Data	X15C9
+1600		Data	X1600
+16C8		Data	X16C8
+16C9		Data	X16C9
+1700		Data	X1700
+17C8		Data	X17C8
+17C9		Data	X17C9
+1800		Data	X1800
+1900		Data	X1900
+1A00		Data	X1A00
+1B00		Data	X1B00
+1C00		Data	X1C00
+1C03		Data	X1C03
+1C04		Data	X1C04
+1C0B		Data	X1C0B
+1C0C		Data	X1C0C
+1C0D		Data	X1C0D
+1C47		Data	X1C47
+1C48		Data	X1C48
+1C49		Data	X1C49
+1C4A		Data	X1C4A
+1C50		Data	X1C50
+1C51		Data	X1C51
+1C52		Data	X1C52
+1C53		Data	X1C53
+1C59		Data	X1C59
+1C5A		Data	X1C5A
+1C5C		Data	X1C5C
+1C84		Data	X1C84
+1C85		Data	X1C85
+1C86		Data	X1C86
+1C87		Data	X1C87
+1C88		Data	X1C88
+1C89		Data	X1C89
+1C8A		Data	X1C8A
+1C91		Data	X1C91
+1C92		Data	X1C92
+1C93		Data	X1C93
+1C95		Data	X1C95
+1C96		Data	X1C96
+1C9E		Data	X1C9E
+1C9F		Data	X1C9F
+1CA0		Data	X1CA0
+1CA1		Data	X1CA1
+1D00		Data	X1D00
+1D05		Data	X1D05
+1D06		Data	X1D06
+1D07		Data	X1D07
+1D13		Data	X1D13
+1D23		Data	X1D23
+1D37		Data	X1D37
+1D46		Data	X1D46
+1D55		Data	X1D55
+1D64		Data	X1D64
+1D73		Data	X1D73
+1D86		Data	X1D86
+1D88		Data	X1D88
+1D89		Data	X1D89
+1D8C		Data	X1D8C
+1D8D		Data	X1D8D
+1D94		Data	X1D94
+1D9F		Data	X1D9F
+1DA0		Data	X1DA0
+1E00		Data	X1E00
+1F00		Data	X1F00
+2000		Code	L2000
+2084		Code	L2084
+212A		Code	L212A
+22F5		Code	L22F5
+23A4		Code	L23A4
+23DD		Code	L23DD
+2432		Code	L2432
+2612		Code	L2612
+2711		Code	L2711
+27B7		Code	L27B7
+2845		Code	L2845
+2AF2		Code	L2AF2
+2D6A		Code	L2D6A
+3399		Code	L3399
+4817		Code	L4817
+
+Number of symbols:			194
+
+;--------------------------------------------------------------

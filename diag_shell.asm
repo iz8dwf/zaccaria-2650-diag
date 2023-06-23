@@ -1,6 +1,8 @@
 ; Diagnostic 1Kbytes ROM for Zaccaria Galaxia arcade PCB
+; this code only tests the "shell" (alien's bombs) RAM and
+; display circuitry.
 ; IZ8DWF 2022
-; rev. 0.6
+; rev. 0.1
 	
 ; This code needs to go in position 8H (mapped at 0000H)
 ; the other ROMs are mapped as follows:
@@ -65,91 +67,41 @@ reset:
 	strz r1		; clears r1
 
 
-
-
-; initial diag outputs are the screen shifter latches	
-	lodi,r2 H'FF'		; set all latch bits to 1
-	wrte,r2 H'00'
-
-; let's first zero all shell RAM now
-; so we can see the "background" characters only
-
-	bsta,un zersh
-
-	ppsu H'40'		; to access the char ram, flag must be 1
-	lodi,r0 H'3F'
-	bsta,un fill
-; outputs a pattern on the PVIs
-
-pvi:	stra,r0 H'1500',r0
-	stra,r0 H'1600',r0
-	stra,r0 H'1700',r0
-	birr,r0 pvi
-	bsta,un wfinp		; wait for player 1 pressed to continue
+; clears the sprites of PVIs
 
 clrpvi:	stra,r0 H'1500',r1
 	stra,r0 H'1600',r1
 	stra,r0 H'1700',r1
 	birr,r1 clrpvi
 
-; now fill all the char ram and color ram with an
-; incrementing pattern from 00 to FF (each with 00 to 11 colors)
 
-wlp:	stra,r0 H'1800',r1,+
-	stra,r0 H'1900',r1	
-	stra,r0 H'1A00',r1	
-	stra,r0 H'1B00',r1
-	brnr,r1 wlp
-	addi,r0 H'01'
-	bstr,un colcyc
-	brnr,r0 wlp
-chrs:	stra,r0 H'1A00',r0,+	; test all charset
-	stra,r0 H'1830',r0
-	brnr,r0 chrs
-	bsta,un wfinp		; wait for player 1 pressed to continue
-	bctr,un tstram
+; initial diag outputs are the screen shifter latches	
+	lodi,r2 H'FF'		; set all latch bits to 1
+	wrte,r2 H'00'
 
-colcyc:
-	cpsu H'40'		; to access color ram
-	strz r3			; save r0
-	eorz r0
-ccyc:	bsta,un fill
-	addi,r0 H'01'
-	bsta,un inpck		; check if fire is pressed, to pause the cycling
-	comi,r0 H'04'
-	bcfr,eq ccyc
-	lodz,r3			; restore old r0
+; clears "background" RAM
+
 	ppsu H'40'		; to access the char ram, flag must be 1
-	retc,un
-
-tstram:
-
-; now let's make a better char ram test
-; copy a ROM image into it and then compare
-; it back. Errors will be output to
-; shifter latches (toggling = bit having errors)
-
-; test the BG ram first
-	ppsu H'40'
-	bsta,un tstbg
 	lodi,r0 H'3F'
 	bsta,un fill
-	lodi,r2 (welc>>8)&H'00FF'	; print the diag banner
-	lodi,r3 (welc&H'00FF')-1	; start address needs to be one byte before the actual string
-	bsta,un stspos
-	lodi,r2 H'1B'
-	lodi,r3 H'E0'
-	bsta,un stvpos
-	bsta,un print
-	lodi,r2 (bg>>8)&H'00FF'	; print BG ram
-	lodi,r3 (bg&H'00FF')-1		; start address needs to be one byte before the actual string
-	bsta,un stspos
-	lodi,r2 H'1B'
-	lodi,r3 H'E1'			; on second row
-	bsta,un stvpos
-	bsta,un print
-	bsta,un prram
-	bsta,un prok
+
+; makes a static diagonal "shell" pattern
+
+	eorz,r0
+	lodz,r1
+fixsh:	stra,r0 H'1400',r0
+	birr,r0 fixsh
+	bsta,un wfinp		; wait for player 1 pressed
+
+; the following makes a shifting pattern
+	eorz,r0
+	lodz,r1
+vsy:	tpsu H'80'		; attempt to start in the vertical retrace
+	bcfr,eq vsy
+shpt:	stra,r0 H'1400',r1,+
+	birr,r0 shpt
+	addi,r1 H'01'
+	bctr,un vsy		; and loops forever
 
 ; now the program ram will be tested
 ; exactly in the same way
@@ -387,9 +339,7 @@ cnt:	eori,r0 H'FF'		; invert the bad bits, now 0 = bad
 	bsta,un wfinp		; wait for player 1 pressed
 noerr:	retc,un
 
-romck:  tpsu H'80'		; attempt to start in the vertical retrace
-	bcfr,eq romck
-	lodi,r0 H'3F'
+romck:	lodi,r0 H'3F'
 	stra,r0 H'1809'
 	stra,r0 H'1804'
 	eorz,r0
