@@ -6,4 +6,4 @@ This code is compiled with the Macro Assembler AS:
 http://john.ccac.rwth-aachen.de:8000/as/
 
 For further information,
-read the .asm file ;-)
+read the .asm files ;-)
