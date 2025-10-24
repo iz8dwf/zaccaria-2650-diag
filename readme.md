@@ -5,5 +5,15 @@ Diagnostic 1Kbytes ROM for Zaccaria Galaxia arcade PCB
 This code is compiled with the Macro Assembler AS:
 http://john.ccac.rwth-aachen.de:8000/as/
 
+1) `diag_galaxia` 
+It can be programmed into a 2708 (or any other PROM memory if you use a socket
+adapter). It goes in the `8H` socket on the Galaxia logic PCB.
+Hint: use the binary with the `galaxiac` MAME driver as the 8h file so you can
+see what it does on a working machine. 
+First displays a pattern on the three 2636 PVIs, then cycles on all the chargen
+characters, then tests all the different RAM segments and if all is ok it
+displays all other ROM's checksums in a loop.
+Use "player 1" input to advance between the tests.
+
 For further information,
 read the .asm files ;-)
