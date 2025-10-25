@@ -1,9 +1,9 @@
- AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 1 - 10/24/2025 06:29:05 PM
+ AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 1 - 10/25/2025 01:37:24 PM
 
 
        1/       0 :                     ; Diagnostic 1Kbytes ROM for Zaccaria Galaxia arcade PCB
        2/       0 :                     ; IZ8DWF 2022
-       3/       0 :                     ; rev. 0.6
+       3/       0 :                     ; rev. 0.7
        4/       0 :                     	
        5/       0 :                     ; This code needs to go in position 8H (mapped at 0000H)
        6/       0 :                     ; the other ROMs are mapped as follows:
@@ -77,7 +77,7 @@
       74/       C :                     ; let's first zero all shell RAM now
       75/       C :                     ; so we can see the "background" characters only
       76/       C :                     
-      77/       C : 3F 03 76            	bsta,un zersh
+      77/       C : 3F 03 86            	bsta,un zersh
       78/       F :                     
       79/       F : 76 40               	ppsu H'40'		; to access the char ram, flag must be 1
       80/      11 : 04 3F               	lodi,r0 H'3F'
@@ -88,7 +88,7 @@
       85/      19 : CC 76 00            	stra,r0 H'1600',r0
       86/      1C : CC 77 00            	stra,r0 H'1700',r0
       87/      1F : D8 75               	birr,r0 pvi
-      88/      21 : 3F 03 21            	bsta,un wfinp		; wait for player 1 pressed to continue
+      88/      21 : 3F 03 31            	bsta,un wfinp		; wait for player 1 pressed to continue
       89/      24 :                     
       90/      24 : CD 75 00            clrpvi:	stra,r0 H'1500',r1
       91/      27 : CD 76 00            	stra,r0 H'1600',r1
@@ -109,7 +109,7 @@
      106/      43 : CC 3A 00            chrs:	stra,r0 H'1A00',r0,+	; test all charset
      107/      46 : CC 78 30            	stra,r0 H'1830',r0
      108/      49 : 58 78               	brnr,r0 chrs
-     109/      4B : 3F 03 21            	bsta,un wfinp		; wait for player 1 pressed to continue
+     109/      4B : 3F 03 31            	bsta,un wfinp		; wait for player 1 pressed to continue
      110/      4E : 1B 14               	bctr,un tstram
      111/      50 :                     
      112/      50 :                     colcyc:
@@ -118,7 +118,7 @@
      115/      53 : 20                  	eorz r0
      116/      54 : 3F 01 F2            ccyc:	bsta,un fill
      117/      57 : 84 01               	addi,r0 H'01'
-     118/      59 : 3F 03 1A            	bsta,un inpck		; check if fire is pressed, to pause the cycling
+     118/      59 : 3F 03 2A            	bsta,un inpck		; check if fire is pressed, to pause the cycling
      119/      5C : E4 04               	comi,r0 H'04'
      120/      5E : 98 74               	bcfr,eq ccyc
      121/      60 : 03                  	lodz,r3			; restore old r0
@@ -138,32 +138,32 @@
      135/      69 : 04 3F               	lodi,r0 H'3F'
      136/      6B : 3F 01 F2            	bsta,un fill
      137/      6E : 06 03               	lodi,r2 (welc>>8)&H'00FF'	; print the diag banner
-     138/      70 : 07 7D               	lodi,r3 (welc&H'00FF')-1	; start address needs to be one byte before the actual string
+     138/      70 : 07 8D               	lodi,r3 (welc&H'00FF')-1	; start address needs to be one byte before the actual string
      139/      72 : 3F 01 E4            	bsta,un stspos
      140/      75 : 06 1B               	lodi,r2 H'1B'
      141/      77 : 07 E0               	lodi,r3 H'E0'
      142/      79 : 3F 01 EB            	bsta,un stvpos
-     143/      7C : 3F 03 41            	bsta,un print
+     143/      7C : 3F 03 51            	bsta,un print
      144/      7F : 06 03               	lodi,r2 (bg>>8)&H'00FF'	; print BG ram
-     145/      81 : 07 9D               	lodi,r3 (bg&H'00FF')-1		; start address needs to be one byte before the actual string
+     145/      81 : 07 AD               	lodi,r3 (bg&H'00FF')-1		; start address needs to be one byte before the actual string
      146/      83 : 3F 01 E4            	bsta,un stspos
      147/      86 : 06 1B               	lodi,r2 H'1B'
      148/      88 : 07 E1               	lodi,r3 H'E1'			; on second row
      149/      8A : 3F 01 EB            	bsta,un stvpos
-     150/      8D : 3F 03 41            	bsta,un print
-     151/      90 : 3F 03 2E            	bsta,un prram
-     152/      93 : 3F 03 3B            	bsta,un prok
+     150/      8D : 3F 03 51            	bsta,un print
+     151/      90 : 3F 03 3E            	bsta,un prram
+     152/      93 : 3F 03 4B            	bsta,un prok
      153/      96 :                     
      154/      96 :                     ; now the program ram will be tested
      155/      96 :                     ; exactly in the same way
      156/      96 : 06 03               	lodi,r2 (cpu>>8)&H'00FF'	; print CPU ram
-     157/      98 : 07 94               	lodi,r3 (cpu&H'00FF')-1		; start address needs to be one byte before the actual string
+     157/      98 : 07 A4               	lodi,r3 (cpu&H'00FF')-1		; start address needs to be one byte before the actual string
      158/      9A : 3F 01 E4            	bsta,un stspos
      159/      9D : 06 1B               	lodi,r2 H'1B'
      160/      9F : 07 E2               	lodi,r3 H'E2'			; on third row
      161/      A1 : 3F 01 EB            	bsta,un stvpos
-     162/      A4 : 3F 03 41            	bsta,un print
-     163/      A7 : 3F 03 2E            	bsta,un prram
+     162/      A4 : 3F 03 51            	bsta,un print
+     163/      A7 : 3F 03 3E            	bsta,un prram
      164/      AA :                     
      165/      AA :                     
      166/      AA : 0D 28 00            pram:	loda,r0 H'0800',r1,+
@@ -196,36 +196,36 @@
      193/      EC : E2                  	comz,r2
      194/      ED : BC 02 49            	bsfa,eq ramerr
      195/      F0 : 59 52               	brnr,r1 cpram
-     196/      F2 : 3F 03 21            	bsta,un wfinp		; wait for player 1 pressed
-     197/      F5 : 3F 03 3B            	bsta,un prok
+     196/      F2 : 3F 03 31            	bsta,un wfinp		; wait for player 1 pressed
+     197/      F5 : 3F 03 4B            	bsta,un prok
      198/      F8 :                     
      199/      F8 :                     ; now we test the two bits of color char ram
      200/      F8 : 06 03               	lodi,r2 (col>>8)&H'00FF'	; print CPU ram
-     201/      FA : 07 A1               	lodi,r3 (col&H'00FF')-1		; start address needs to be one byte before the actual string
+     201/      FA : 07 B1               	lodi,r3 (col&H'00FF')-1		; start address needs to be one byte before the actual string
      202/      FC : 3F 01 E4            	bsta,un stspos
      203/      FF : 06 1B               	lodi,r2 H'1B'
      204/     101 : 07 E3               	lodi,r3 H'E3'			; on 4th row
      205/     103 : 3F 01 EB            	bsta,un stvpos
-     206/     106 : 3F 03 41            	bsta,un print
-     207/     109 : 3F 03 2E            	bsta,un prram
+     206/     106 : 3F 03 51            	bsta,un print
+     207/     109 : 3F 03 3E            	bsta,un prram
      208/     10C :                     
      209/     10C : 74 40               	cpsu H'40'		; to access color ram
      210/     10E : 3F 02 01            	bsta,un tstbg
      211/     111 : 04 03               	lodi,r0 H'03'		; restore a single color
      212/     113 : 3F 01 F2            	bsta,un fill
      213/     116 : 76 40               	ppsu H'40'		; to access char ram
-     214/     118 : 3F 03 3B            	bsta,un prok
+     214/     118 : 3F 03 4B            	bsta,un prok
      215/     11B :                     
      216/     11B :                     ; test the "shell" RAM, 256 bytes total
      217/     11B :                     ; 
      218/     11B : 06 03               	lodi,r2 (shel>>8)&H'00FF'	; print CPU ram
-     219/     11D : 07 A5               	lodi,r3 (shel&H'00FF')-1		; start address needs to be one byte before the actual string
+     219/     11D : 07 B5               	lodi,r3 (shel&H'00FF')-1		; start address needs to be one byte before the actual string
      220/     11F : 3F 01 E4            	bsta,un stspos
      221/     122 : 06 1B               	lodi,r2 H'1B'
      222/     124 : 07 E4               	lodi,r3 H'E4'			; on 5th row
      223/     126 : 3F 01 EB            	bsta,un stvpos
-     224/     129 : 3F 03 41            	bsta,un print
-     225/     12C : 3F 03 2E            	bsta,un prram
+     224/     129 : 3F 03 51            	bsta,un print
+     225/     12C : 3F 03 3E            	bsta,un prram
      226/     12F :                     
      227/     12F : 0D 24 00            shwlp:	loda,r0 H'0400',r1,+ 	; let's copy part of a ROM
      228/     132 : CD 74 00            	stra,r0 H'1400',r1 	; to shell ram range 
@@ -236,8 +236,8 @@
      233/     13E : E2                  	comz,r2
      234/     13F : BC 02 49            	bsfa,eq	ramerr		
      235/     142 : 59 73               	brnr,r1 shcmp
-     236/     144 : 3F 03 3B            	bsta,un prok
-     237/     147 : 3F 03 76            	bsta,un zersh
+     236/     144 : 3F 03 4B            	bsta,un prok
+     237/     147 : 3F 03 86            	bsta,un zersh
      238/     14A :                     ; print the collision latch content after zeroing it
      239/     14A :                     ; it must read 04H
      240/     14A :                     ;	redd,r0			; resets the collision registers
@@ -263,66 +263,66 @@
      260/     14A :                     ; calculate chksum of all ROMs
      261/     14A :                     roms:	
      262/     14A : 06 03               	lodi,r2 (tenh>>8)&H'00FF'
-     263/     14C : 07 B5               	lodi,r3 (tenh&H'00FF')-1		; start address needs to be one byte before the actual string
+     263/     14C : 07 C5               	lodi,r3 (tenh&H'00FF')-1		; start address needs to be one byte before the actual string
      264/     14E : 3F 01 E4            	bsta,un stspos
      265/     151 : 06 1B               	lodi,r2 H'1B'
      266/     153 : 07 E6               	lodi,r3 H'E6'			; on 5th row
      267/     155 : 3F 01 EB            	bsta,un stvpos
-     268/     158 : 3F 03 41            	bsta,un print
+     268/     158 : 3F 03 51            	bsta,un print
      269/     15B : 06 04               	lodi,r2 H'04'
      270/     15D : CE 18 1E            	stra,r2 H'181E'			; use 181E-F as ROM pointer
      271/     160 : 20                  	eorz,r0
      272/     161 : CC 18 1F            	stra,r0 H'181F'
      273/     164 : 3F 02 5D            	bsta,un romck
      274/     167 : 06 03               	lodi,r2 (eleh>>8)&H'00FF'
-     275/     169 : 07 B9               	lodi,r3 (eleh&H'00FF')-1		; start address needs to be one byte before the actual string
+     275/     169 : 07 C9               	lodi,r3 (eleh&H'00FF')-1		; start address needs to be one byte before the actual string
      276/     16B : 3F 01 E4            	bsta,un stspos
-     277/     16E : 3F 03 41            	bsta,un print
+     277/     16E : 3F 03 51            	bsta,un print
      278/     171 : 3F 02 5D            	bsta,un romck
      279/     174 : 06 03               	lodi,r2 (thih>>8)&H'00FF'
-     280/     176 : 07 BD               	lodi,r3 (thih&H'00FF')-1		; start address needs to be one byte before the actual string
+     280/     176 : 07 CD               	lodi,r3 (thih&H'00FF')-1		; start address needs to be one byte before the actual string
      281/     178 : 3F 01 E4            	bsta,un stspos
-     282/     17B : 3F 03 41            	bsta,un print
+     282/     17B : 3F 03 51            	bsta,un print
      283/     17E : 3F 02 5D            	bsta,un romck
      284/     181 : 06 03               	lodi,r2 (eigi>>8)&H'00FF'
-     285/     183 : 07 C1               	lodi,r3 (eigi&H'00FF')-1		; start address needs to be one byte before the actual string
+     285/     183 : 07 D1               	lodi,r3 (eigi&H'00FF')-1		; start address needs to be one byte before the actual string
      286/     185 : 3F 01 E4            	bsta,un stspos
      287/     188 : 06 1B               	lodi,r2 H'1B'
      288/     18A : 07 E7               	lodi,r3 H'E7'			; on 6th row
      289/     18C : 3F 01 EB            	bsta,un stvpos
-     290/     18F : 3F 03 41            	bsta,un print
+     290/     18F : 3F 03 51            	bsta,un print
      291/     192 : 3F 02 5D            	bsta,un romck
      292/     195 : 06 03               	lodi,r2 (teni>>8)&H'00FF'
-     293/     197 : 07 C4               	lodi,r3 (teni&H'00FF')-1		; start address needs to be one byte before the actual string
+     293/     197 : 07 D4               	lodi,r3 (teni&H'00FF')-1		; start address needs to be one byte before the actual string
      294/     199 : 3F 01 E4            	bsta,un stspos
-     295/     19C : 3F 03 41            	bsta,un print
+     295/     19C : 3F 03 51            	bsta,un print
      296/     19F : 06 20               	lodi,r2 H'20'
      297/     1A1 : CE 18 1E            	stra,r2 H'181E'			; use 181E-F as ROM pointer
      298/     1A4 : 20                  	eorz,r0
      299/     1A5 : CC 18 1F            	stra,r0 H'181F'
      300/     1A8 : 3F 02 5D            	bsta,un romck
      301/     1AB : 06 03               	lodi,r2 (elei>>8)&H'00FF'
-     302/     1AD : 07 C8               	lodi,r3 (elei&H'00FF')-1		; start address needs to be one byte before the actual string
+     302/     1AD : 07 D8               	lodi,r3 (elei&H'00FF')-1		; start address needs to be one byte before the actual string
      303/     1AF : 3B 33               	bstr,un stspos
-     304/     1B1 : 3F 03 41            	bsta,un print
+     304/     1B1 : 3F 03 51            	bsta,un print
      305/     1B4 : 3F 02 5D            	bsta,un romck
      306/     1B7 : 06 03               	lodi,r2 (thii>>8)&H'00FF'
-     307/     1B9 : 07 CC               	lodi,r3 (thii&H'00FF')-1		; start address needs to be one byte before the actual string
+     307/     1B9 : 07 DC               	lodi,r3 (thii&H'00FF')-1		; start address needs to be one byte before the actual string
      308/     1BB : 3B 27               	bstr,un stspos
      309/     1BD : 06 1B               	lodi,r2 H'1B'
      310/     1BF : 07 E8               	lodi,r3 H'E8'			; on 7th row
      311/     1C1 : 3B 28               	bstr,un stvpos
-     312/     1C3 : 3F 03 41            	bsta,un print
+     312/     1C3 : 3F 03 51            	bsta,un print
      313/     1C6 : 3F 02 5D            	bsta,un romck
      314/     1C9 : 06 03               	lodi,r2 (elel>>8)&H'00FF'
-     315/     1CB : 07 D0               	lodi,r3 (elel&H'00FF')-1		; start address needs to be one byte before the actual string
+     315/     1CB : 07 E0               	lodi,r3 (elel&H'00FF')-1		; start address needs to be one byte before the actual string
      316/     1CD : 3B 15               	bstr,un stspos
-     317/     1CF : 3F 03 41            	bsta,un print
+     317/     1CF : 3F 03 51            	bsta,un print
      318/     1D2 : 3F 02 5D            	bsta,un romck
      319/     1D5 : 06 03               	lodi,r2 (thil>>8)&H'00FF'
-     320/     1D7 : 07 D4               	lodi,r3 (thil&H'00FF')-1		; start address needs to be one byte before the actual string
+     320/     1D7 : 07 E4               	lodi,r3 (thil&H'00FF')-1		; start address needs to be one byte before the actual string
      321/     1D9 : 3B 09               	bstr,un stspos
-     322/     1DB : 3F 03 41            	bsta,un print
+     322/     1DB : 3F 03 51            	bsta,un print
      323/     1DE : 3F 02 5D            	bsta,un romck
      324/     1E1 : 1F 01 4A            	bcta,un roms			; loop on rom cksum
      325/     1E4 :                     ; subroutines
@@ -374,7 +374,7 @@
      371/     240 : E2                  	comz,r2
      372/     241 : B8 06               	bsfr,eq ramerr
      373/     243 : 59 56               	brnr,r1 cpbg
-     374/     245 : 3F 03 21            	bsta,un wfinp		; wait for player 1 pressed
+     374/     245 : 3F 03 31            	bsta,un wfinp		; wait for player 1 pressed
      375/     248 : 17                  	retc,un
      376/     249 :                     	
      377/     249 :                     
@@ -387,7 +387,7 @@
      384/     252 : 24 FF               cnt:	eori,r0 H'FF'		; invert the bad bits, now 0 = bad
      385/     254 : D4 00               	wrte,r0 H'00'		; shif register bits toggling are BAD
      386/     256 : 3F 02 CC            	bsta,un prerr		; print error bits and error offset
-     387/     259 : 3F 03 21            	bsta,un wfinp		; wait for player 1 pressed
+     387/     259 : 3F 03 31            	bsta,un wfinp		; wait for player 1 pressed
      388/     25C : 17                  noerr:	retc,un
      389/     25D :                     
      390/     25D : B4 80               romck:  tpsu H'80'		; attempt to start in the vertical retrace
@@ -429,7 +429,7 @@
      426/     2AF : 06 18               	lodi,r2 H'18'			
      427/     2B1 : 07 03               	lodi,r3 H'03'
      428/     2B3 : 3F 01 E4            	bsta,un stspos
-     429/     2B6 : 3F 03 41            	bsta,un print
+     429/     2B6 : 3F 03 51            	bsta,un print
      430/     2B9 : 17                  	retc,un
      431/     2BA :                     
      432/     2BA :                     
@@ -449,179 +449,186 @@
      446/     2CB : 17                  	retc,un
      447/     2CC :                     
      448/     2CC :                     
-     449/     2CC :                     prerr:				; error bits (0 = bad) are in r0, offset in r1
-     450/     2CC : 24 FF               	eori,r0 H'FF'		; lets invert the bits again
-     451/     2CE : CC 18 04            	stra,r0 H'1804'		; save the value
-     452/     2D1 : 3B 67               	bstr,un hexadj
-     453/     2D3 : CC 18 05            	stra,r0 H'1805'
-     454/     2D6 : 0C 18 04            	loda,r0 H'1804'
-     455/     2D9 : 3B 6A               	bstr,un rot0
-     456/     2DB : CC 18 04            	stra,r0 H'1804'
-     457/     2DE : 20                  	eorz,r0
-     458/     2DF : CC 18 06            	stra,r0 H'1806'
-     459/     2E2 : CC 18 09            	stra,r0 H'1809'
-     460/     2E5 : 01                  	lodz,r1
-     461/     2E6 : 3B 52               	bstr,un hexadj
-     462/     2E8 : CC 18 08            	stra,r0 H'1808'
-     463/     2EB : 01                  	lodz,r1
-     464/     2EC : 3B 57               	bstr,un rot0
-     465/     2EE : CC 18 07            	stra,r0 H'1807'
-     466/     2F1 : 06 03               	lodi,r2 (bits>>8)&H'00FF'	
-     467/     2F3 : 07 AD               	lodi,r3 (bits&H'00FF')-1	; start address needs to be one byte before the actual string
-     468/     2F5 : 3F 01 E4            	bsta,un stspos
-     469/     2F8 : 3F 03 41            	bsta,un print
-     470/     2FB :                     
-     471/     2FB : 06 18               	lodi,r2 H'18'			; prints the bit error hex
-     472/     2FD : 07 03               	lodi,r3 H'03'
-     473/     2FF : 3F 01 E4            	bsta,un stspos
-     474/     302 : 3F 03 41            	bsta,un print
-     475/     305 :                     
-     476/     305 : 06 03               	lodi,r2 (offs>>8)&H'00FF'	
-     477/     307 : 07 B1               	lodi,r3 (offs&H'00FF')-1	; start address needs to be one byte before the actual string
-     478/     309 : 3F 01 E4            	bsta,un stspos
-     479/     30C : 3F 03 41            	bsta,un print
-     480/     30F : 06 18               	lodi,r2 H'18'			
-     481/     311 : 07 06               	lodi,r3 H'06'
-     482/     313 : 3F 01 E4            	bsta,un stspos
-     483/     316 : 3F 03 41            	bsta,un print
-     484/     319 : 17                  	retc,un
-     485/     31A :                     
-     486/     31A :                     
-     487/     31A :                     inpck:
-     488/     31A : 56 00               	rede,r2 H'00'		; read input col. 0
-     489/     31C : 46 20               	andi,r2 H'20'		; mask bit 5 (fire)
-     490/     31E : 18 7A               	bctr,eq inpck		; if is pressed, we wait
-     491/     320 : 17                  	retc,un
-     492/     321 :                     wfinp:
-     493/     321 : 56 00               	rede,r2 H'00'		; read input col. 0
-     494/     323 : 46 01               	andi,r2 H'01'		; mask bit 0 (player 1)
-     495/     325 : 98 7A               	bcfr,eq wfinp		; if is NOT pressed, we wait
-     496/     327 : 56 00               wfrl:	rede,r2 H'00'
-     497/     329 : 46 01               	andi,r2 H'01'		
-     498/     32B : 18 7A               	bctr,eq wfrl		; wait for release
-     499/     32D : 17                  	retc,un
-     500/     32E :                     
-     501/     32E :                     prram:
-     502/     32E : 06 03               	lodi,r2 (ram>>8)&H'00FF'	; print ram
-     503/     330 : 07 8C               	lodi,r3 (ram&H'00FF')-1		; start address needs to be one byte before the actual string
-     504/     332 : CE 18 00            strp:	stra,r2 H'1800'
-     505/     335 : CF 18 01            	stra,r3 H'1801'
-     506/     338 : 3B 07               	bstr,un print
-     507/     33A : 17                  	retc,un
-     508/     33B :                     prok:
-     509/     33B : 06 03               	lodi,r2 (ok>>8)&H'00FF'	; print ok
-     510/     33D : 07 A9               	lodi,r3 (ok&H'00FF')-1		; start address needs to be one byte before the actual string
-     511/     33F : 1B 71               	bctr,un strp
-     512/     341 :                     print:
-     513/     341 : 77 10               	ppsl H'10'		; use alternate registers
-     514/     343 : 05 00               	lodi,r1 H'00'
-     515/     345 : 0E 18 02            	loda,r2 H'1802'
-     516/     348 : 0F 18 03            	loda,r3 H'1803'
-     517/     34B : 0D B8 00            rdnext:	loda,r0 *H'1800',r1,+
-     518/     34E : 18 23               	bctr,eq expr		; we reached the null termination
-     519/     350 : CC 98 02            	stra,r0 *H'1802'	; store in video ram
-     520/     353 : E7 40               	comi,r3 H'40'
-     521/     355 : 9A 0C               	bcfr,lt t20
-     522/     357 : E6 18               	comi,r2 H'18'		; attempt at wrapping around to the next line
-     523/     359 : 19 08               	bctr,gt t20
-     524/     35B : 06 1B               	lodi,r2 H'1B'
-     525/     35D : 47 1F               	andi,r3 H'1F'
-     526/     35F : 87 01               	addi,r3 H'01'
-     527/     361 : 1B 06               	bctr,un st2
-     528/     363 : E7 20               t20:	comi,r3 H'20'
-     529/     365 : 9A 05               	bcfr,lt npos
-     530/     367 : A6 01               	subi,r2 H'01'
-     531/     369 : CE 18 02            st2:	stra,r2 H'1802'
-     532/     36C : A7 20               npos:	subi,r3 H'20'
-     533/     36E : CF 18 03            	stra,r3 H'1803'
-     534/     371 : 1B 58               	bctr,un rdnext
-     535/     373 : 75 10               expr:	cpsl H'10'		; "old" registers again
-     536/     375 : 17                  	retc,un
-     537/     376 :                     	
-     538/     376 :                     
-     539/     376 : 20                  zersh:	eorz,r0
-     540/     377 : C1                  	strz,r1
-     541/     378 : CD 34 00            wz:	stra,r0 H'1400',r1,+
-     542/     37B : 59 7B               	brnr,r1 wz
-     543/     37D : 17                  	retc,un
-     544/     37E :                     
-     545/     37E :                     ; not all letters are available! 
-     546/     37E :                     ; space is 3Fh
-     547/     37E :                     ; numbers start at 60h
-     548/     37E :                     
-     549/     37E : 47 41 4C 41 3F 44   welc:	db "GALA",H'3F',"DIAG",H'3F',H'68',"DWF\0"
-              384 : 49 41 47 3F 68 44 
-              38A : 57 46 00          
-     550/     38D : 52 41 4D 00         ram:	db "RAM\0"
-     551/     391 : 52 4F 4D 00         rom:	db "ROM\0"
-     552/     395 : 43 50 3F 00         cpu:	db "CP",H'3F',H'00'
-     553/     399 : 3F 43 4C 3F 00      cll:	db H'3F',"CL",H'3F',H'00'
-     554/     39E : 42 47 3F 00         bg:	db "BG",H'3F',H'00'
-     555/     3A2 : 43 4F 3F 00         col:	db "CO",H'3F',H'00'
-     556/     3A6 : 53 48 3F 00         shel:	db "SH",H'3F',H'00'
-     557/     3AA : 3F 47 44 00         ok:	db H'3F',"GD",H'00'
-     558/     3AE : 3F 42 3F 00         bits:	db H'3F',"B",H'3F',H'00'
-     559/     3B2 : 3F 4F 3F 00         offs:	db H'3F',"O",H'3F',H'00'
-     560/     3B6 : 61 60 48 00         tenh:	db H'61',H'60',"H\0"
-     561/     3BA : 61 61 48 00         eleh:	db H'61',H'61',"H\0"
-     562/     3BE : 61 63 48 00         thih:	db H'61',H'63',"H\0"
-     563/     3C2 : 68 49 00            eigi:	db H'68',"I\0"
-     564/     3C5 : 61 60 49 00         teni:	db H'61',H'60',"I\0"
-     565/     3C9 : 61 61 49 00         elei:	db H'61',H'61',"I\0"
-     566/     3CD : 61 63 49 00         thii:	db H'61',H'63',"I\0"
-     567/     3D1 : 61 61 4C 00         elel:	db H'61',H'61',"L\0"
-     568/     3D5 : 61 63 4C 00         thil:	db H'61',H'63',"L\0"
-     569/     3D9 :                     
- AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 2 - 10/24/2025 06:29:05 PM
+     449/     2CC : CC 1F F0            prerr:	stra,r0 H'1FF0'		; saves register 0 in program RAM
+     450/     2CF : 12                  	spsu			; stores cpu status upper in r0
+     451/     2D0 : CC 1F F1            	stra,r0 H'1FF1'		; and writes it in program RAM too	
+     452/     2D3 : 76 40               	ppsu H'40'		; to access the char ram, flag must be 1
+     453/     2D5 : 0C 1F F0            	loda,r0 H'1FF0'
+     454/     2D8 :                     				; error bits (0 = bad) are in r0, offset in r1
+     455/     2D8 : 24 FF               	eori,r0 H'FF'		; lets invert the bits again
+     456/     2DA : CC 18 04            	stra,r0 H'1804'		; save the value
+     457/     2DD : 3B 5B               	bstr,un hexadj
+     458/     2DF : CC 18 05            	stra,r0 H'1805'
+     459/     2E2 : 0C 18 04            	loda,r0 H'1804'
+     460/     2E5 : 3B 5E               	bstr,un rot0
+     461/     2E7 : CC 18 04            	stra,r0 H'1804'
+     462/     2EA : 20                  	eorz,r0
+     463/     2EB : CC 18 06            	stra,r0 H'1806'
+     464/     2EE : CC 18 09            	stra,r0 H'1809'
+     465/     2F1 : 01                  	lodz,r1
+     466/     2F2 : 3B 46               	bstr,un hexadj
+     467/     2F4 : CC 18 08            	stra,r0 H'1808'
+     468/     2F7 : 01                  	lodz,r1
+     469/     2F8 : 3B 4B               	bstr,un rot0
+     470/     2FA : CC 18 07            	stra,r0 H'1807'
+     471/     2FD : 06 03               	lodi,r2 (bits>>8)&H'00FF'	
+     472/     2FF : 07 BD               	lodi,r3 (bits&H'00FF')-1	; start address needs to be one byte before the actual string
+     473/     301 : 3F 01 E4            	bsta,un stspos
+     474/     304 : 3F 03 51            	bsta,un print
+     475/     307 :                     
+     476/     307 : 06 18               	lodi,r2 H'18'			; prints the bit error hex
+     477/     309 : 07 03               	lodi,r3 H'03'
+     478/     30B : 3F 01 E4            	bsta,un stspos
+     479/     30E : 3F 03 51            	bsta,un print
+     480/     311 :                     
+     481/     311 : 06 03               	lodi,r2 (offs>>8)&H'00FF'	
+     482/     313 : 07 C1               	lodi,r3 (offs&H'00FF')-1	; start address needs to be one byte before the actual string
+     483/     315 : 3F 01 E4            	bsta,un stspos
+     484/     318 : 3F 03 51            	bsta,un print
+     485/     31B : 06 18               	lodi,r2 H'18'			
+     486/     31D : 07 06               	lodi,r3 H'06'
+     487/     31F : 3F 01 E4            	bsta,un stspos
+     488/     322 : 3F 03 51            	bsta,un print
+     489/     325 : 0C 1F F1            	loda,r0 H'1FF1'		; get the saved cpu status upper byte
+     490/     328 : 92                  	lpsu			; and rewrite in the actual status byte
+     491/     329 : 17                  	retc,un
+     492/     32A :                     
+     493/     32A :                     
+     494/     32A :                     inpck:
+     495/     32A : 56 00               	rede,r2 H'00'		; read input col. 0
+     496/     32C : 46 20               	andi,r2 H'20'		; mask bit 5 (fire)
+     497/     32E : 18 7A               	bctr,eq inpck		; if is pressed, we wait
+     498/     330 : 17                  	retc,un
+     499/     331 :                     wfinp:
+     500/     331 : 56 00               	rede,r2 H'00'		; read input col. 0
+     501/     333 : 46 01               	andi,r2 H'01'		; mask bit 0 (player 1)
+     502/     335 : 98 7A               	bcfr,eq wfinp		; if is NOT pressed, we wait
+     503/     337 : 56 00               wfrl:	rede,r2 H'00'
+     504/     339 : 46 01               	andi,r2 H'01'		
+     505/     33B : 18 7A               	bctr,eq wfrl		; wait for release
+     506/     33D : 17                  	retc,un
+     507/     33E :                     
+     508/     33E :                     prram:
+     509/     33E : 06 03               	lodi,r2 (ram>>8)&H'00FF'	; print ram
+     510/     340 : 07 9C               	lodi,r3 (ram&H'00FF')-1		; start address needs to be one byte before the actual string
+     511/     342 : CE 18 00            strp:	stra,r2 H'1800'
+     512/     345 : CF 18 01            	stra,r3 H'1801'
+     513/     348 : 3B 07               	bstr,un print
+     514/     34A : 17                  	retc,un
+     515/     34B :                     prok:
+     516/     34B : 06 03               	lodi,r2 (ok>>8)&H'00FF'	; print ok
+     517/     34D : 07 B9               	lodi,r3 (ok&H'00FF')-1		; start address needs to be one byte before the actual string
+     518/     34F : 1B 71               	bctr,un strp
+     519/     351 :                     print:
+     520/     351 : 77 10               	ppsl H'10'		; use alternate registers
+     521/     353 : 05 00               	lodi,r1 H'00'
+     522/     355 : 0E 18 02            	loda,r2 H'1802'
+     523/     358 : 0F 18 03            	loda,r3 H'1803'
+     524/     35B : 0D B8 00            rdnext:	loda,r0 *H'1800',r1,+
+     525/     35E : 18 23               	bctr,eq expr		; we reached the null termination
+     526/     360 : CC 98 02            	stra,r0 *H'1802'	; store in video ram
+     527/     363 : E7 40               	comi,r3 H'40'
+     528/     365 : 9A 0C               	bcfr,lt t20
+     529/     367 : E6 18               	comi,r2 H'18'		; attempt at wrapping around to the next line
+     530/     369 : 19 08               	bctr,gt t20
+     531/     36B : 06 1B               	lodi,r2 H'1B'
+     532/     36D : 47 1F               	andi,r3 H'1F'
+     533/     36F : 87 01               	addi,r3 H'01'
+     534/     371 : 1B 06               	bctr,un st2
+     535/     373 : E7 20               t20:	comi,r3 H'20'
+     536/     375 : 9A 05               	bcfr,lt npos
+     537/     377 : A6 01               	subi,r2 H'01'
+     538/     379 : CE 18 02            st2:	stra,r2 H'1802'
+     539/     37C : A7 20               npos:	subi,r3 H'20'
+     540/     37E : CF 18 03            	stra,r3 H'1803'
+     541/     381 : 1B 58               	bctr,un rdnext
+     542/     383 : 75 10               expr:	cpsl H'10'		; "old" registers again
+     543/     385 : 17                  	retc,un
+     544/     386 :                     	
+     545/     386 :                     
+     546/     386 : 20                  zersh:	eorz,r0
+     547/     387 : C1                  	strz,r1
+     548/     388 : CD 34 00            wz:	stra,r0 H'1400',r1,+
+     549/     38B : 59 7B               	brnr,r1 wz
+     550/     38D : 17                  	retc,un
+     551/     38E :                     
+     552/     38E :                     ; not all letters are available! 
+     553/     38E :                     ; space is 3Fh
+     554/     38E :                     ; numbers start at 60h
+     555/     38E :                     
+     556/     38E : 47 41 4C 41 3F 44   welc:	db "GALA",H'3F',"DIAG",H'3F',H'68',"DWF\0"
+              394 : 49 41 47 3F 68 44 
+              39A : 57 46 00          
+     557/     39D : 52 41 4D 00         ram:	db "RAM\0"
+     558/     3A1 : 52 4F 4D 00         rom:	db "ROM\0"
+     559/     3A5 : 43 50 3F 00         cpu:	db "CP",H'3F',H'00'
+     560/     3A9 : 3F 43 4C 3F 00      cll:	db H'3F',"CL",H'3F',H'00'
+     561/     3AE : 42 47 3F 00         bg:	db "BG",H'3F',H'00'
+     562/     3B2 : 43 4F 3F 00         col:	db "CO",H'3F',H'00'
+     563/     3B6 : 53 48 3F 00         shel:	db "SH",H'3F',H'00'
+     564/     3BA : 3F 47 44 00         ok:	db H'3F',"GD",H'00'
+     565/     3BE : 3F 42 3F 00         bits:	db H'3F',"B",H'3F',H'00'
+     566/     3C2 : 3F 4F 3F 00         offs:	db H'3F',"O",H'3F',H'00'
+     567/     3C6 : 61 60 48 00         tenh:	db H'61',H'60',"H\0"
+     568/     3CA : 61 61 48 00         eleh:	db H'61',H'61',"H\0"
+     569/     3CE : 61 63 48 00         thih:	db H'61',H'63',"H\0"
+     570/     3D2 : 68 49 00            eigi:	db H'68',"I\0"
+     571/     3D5 : 61 60 49 00         teni:	db H'61',H'60',"I\0"
+     572/     3D9 : 61 61 49 00         elei:	db H'61',H'61',"I\0"
+     573/     3DD : 61 63 49 00         thii:	db H'61',H'63',"I\0"
+     574/     3E1 : 61 61 4C 00         elel:	db H'61',H'61',"L\0"
+     575/     3E5 : 61 63 4C 00         thil:	db H'61',H'63',"L\0"
+     576/     3E9 :                     
+ AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 2 - 10/25/2025 01:37:24 PM
 
 
   Symbol Table (* = unused):
   --------------------------
 
 *ARCHITECTURE :                                      "x86_64-unknown-linux" - |
- BG :                           39E C |  BITS :                         3AE C |
+ BG :                           3AE C |  BITS :                         3BE C |
 *CASESENSITIVE :                  0 - |  CCYC :                          54 C |
- CHRS :                          43 C | *CLL :                          399 C |
+ CHRS :                          43 C | *CLL :                          3A9 C |
  CLRPVI :                        24 C |  CNT :                          252 C |
- COL :                          3A2 C |  COLCYC :                        50 C |
+ COL :                          3B2 C |  COLCYC :                        50 C |
 *COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
  CPBG :                         21B C |  CPRAM :                         C4 C |
- CPU :                          395 C | *DATE :                "10/24/2025" - |
- EIGI :                         3C2 C |  ELEH :                         3BA C |
- ELEI :                         3C9 C |  ELEL :                         3D1 C |
- EXPR :                         373 C | *FALSE :                          0 - |
+ CPU :                          3A5 C | *DATE :                "10/25/2025" - |
+ EIGI :                         3D2 C |  ELEH :                         3CA C |
+ ELEI :                         3D9 C |  ELEL :                         3E1 C |
+ EXPR :                         383 C | *FALSE :                          0 - |
  FILL :                         1F2 C | *HAS64 :                          1 - |
- HEXADJ :                       2BA C |  INPCK :                        31A C |
+ HEXADJ :                       2BA C |  INPCK :                        32A C |
 *LISTON :                         1 - | *MACEXP :                         7 - |
 *MOMCPU :                      2650 - | *MOMCPUNAME :                "2650" - |
 *NESTMAX :                      100 - |  NOERR :                        25C C |
- NPOS :                         36C C |  OFFS :                         3B2 C |
- OK :                           3AA C |  PRAM :                          AA C |
- PRERR :                        2CC C |  PRINT :                        341 C |
- PROK :                         33B C |  PRRAM :                        32E C |
- PVI :                           16 C |  RAM :                          38D C |
- RAMERR :                       249 C |  RDNEXT :                       34B C |
+ NPOS :                         37C C |  OFFS :                         3C2 C |
+ OK :                           3BA C |  PRAM :                          AA C |
+ PRERR :                        2CC C |  PRINT :                        351 C |
+ PROK :                         34B C |  PRRAM :                        33E C |
+ PVI :                           16 C |  RAM :                          39D C |
+ RAMERR :                       249 C |  RDNEXT :                       35B C |
 *RELAXED :                        1 - | *RESET :                          0 C |
-*ROM :                          391 C |  ROMCK :                        25D C |
+*ROM :                          3A1 C |  ROMCK :                        25D C |
  ROMS :                         14A C |  ROT0 :                         2C5 C |
- SHCMP :                        137 C |  SHEL :                         3A6 C |
- SHWLP :                        12F C |  ST2 :                          369 C |
- STLOW :                        2C4 C |  STRP :                         332 C |
+ SHCMP :                        137 C |  SHEL :                         3B6 C |
+ SHWLP :                        12F C |  ST2 :                          379 C |
+ STLOW :                        2C4 C |  STRP :                         342 C |
  STSPOS :                       1E4 C |  STVPOS :                       1EB C |
- SUM :                          27B C |  T20 :                          363 C |
- TENH :                         3B6 C |  TENI :                         3C5 C |
- THIH :                         3BE C |  THII :                         3CD C |
- THIL :                         3D5 C | *TIME :               "06:29:05 PM" - |
+ SUM :                          27B C |  T20 :                          373 C |
+ TENH :                         3C6 C |  TENI :                         3D5 C |
+ THIH :                         3CE C |  THII :                         3DD C |
+ THIL :                         3E5 C | *TIME :               "01:37:24 PM" - |
 *TRUE :                           1 - |  TSTBG :                        201 C |
  TSTRAM :                        64 C | *VERSION :                     142F - |
- WELC :                         37E C |  WFINP :                        321 C |
- WFRL :                         327 C |  WLP :                           2F C |
- WZ :                           378 C |  ZERSH :                        376 C |
+ WELC :                         38E C |  WFINP :                        331 C |
+ WFRL :                         337 C |  WLP :                           2F C |
+ WZ :                           388 C |  ZERSH :                        386 C |
 
      77 symbols
      19 unused symbols
 
- AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 3 - 10/24/2025 06:29:05 PM
+ AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 3 - 10/25/2025 01:37:24 PM
 
 
   Code Pages:
@@ -633,7 +640,7 @@ STANDARD (0 changed characters)
 
 0.01 seconds assembly time
 
-    569 lines source file
+    576 lines source file
       2 passes
       0 errors
       0 warnings

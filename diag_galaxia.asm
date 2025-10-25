@@ -1,6 +1,6 @@
 ; Diagnostic 1Kbytes ROM for Zaccaria Galaxia arcade PCB
 ; IZ8DWF 2022
-; rev. 0.6
+; rev. 0.7
 	
 ; This code needs to go in position 8H (mapped at 0000H)
 ; the other ROMs are mapped as follows:
@@ -446,7 +446,12 @@ rot0:	rrr,r0
 	retc,un
 
 
-prerr:				; error bits (0 = bad) are in r0, offset in r1
+prerr:	stra,r0 H'1FF0'		; saves register 0 in program RAM
+	spsu			; stores cpu status upper in r0
+	stra,r0 H'1FF1'		; and writes it in program RAM too	
+	ppsu H'40'		; to access the char ram, flag must be 1
+	loda,r0 H'1FF0'
+				; error bits (0 = bad) are in r0, offset in r1
 	eori,r0 H'FF'		; lets invert the bits again
 	stra,r0 H'1804'		; save the value
 	bstr,un hexadj
@@ -481,6 +486,8 @@ prerr:				; error bits (0 = bad) are in r0, offset in r1
 	lodi,r3 H'06'
 	bsta,un stspos
 	bsta,un print
+	loda,r0 H'1FF1'		; get the saved cpu status upper byte
+	lpsu			; and rewrite in the actual status byte
 	retc,un
 
 
