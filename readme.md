@@ -20,7 +20,13 @@ Use "player 1" input to advance between the tests.
 
 Also this goes in the `8H` socket. It exercises the shell RAM and shell video
 generator (shell are the galaxian's bombs, these are generated as separate
-objects and are neither characters nor PVI's sprites).
+objects and are neither characters nor PVI's sprites). Press `Player 1` to
+change from a static pattern to a moving one.
+
+3) `diag_awshell`
+
+Same test as `diag_shell` but for the Astro War PCB that has different memory
+mapping. 
 
 For further information,
 read the .asm files ;-)

@@ -1,0 +1,222 @@
+ AS V1.42 Beta [Bld 230] - Source File diag_awshell.asm - Page 1 - 11/06/2025 06:58:21 PM
+
+
+       1/       0 :                     ; Diagnostic 1Kbytes ROM for Zaccaria Astro War arcade PCB
+       2/       0 :                     ; this code only tests the "shell" (alien's bombs) RAM and
+       3/       0 :                     ; display circuitry.
+       4/       0 :                     ; IZ8DWF 2022 - 2025
+       5/       0 :                     ; rev. 0.1
+       6/       0 :                     	
+       7/       0 :                     ; This code needs to go in position 8H (mapped at 0000H)
+       8/       0 :                     ; the other ROMs are mapped as follows:
+       9/       0 :                     ; 10H @ 0400H
+      10/       0 :                     ; 11H @ 0800H
+      11/       0 :                     ; 13H @ 0C00H
+      12/       0 :                     ; 8I  @ 1000H
+      13/       0 :                     ; 10I @ 2000H
+      14/       0 :                     ; 11I @ 2400H
+      15/       0 :                     ; 13I @ 2800H
+      16/       0 :                     ; 11L @ 2C00H
+      17/       0 :                     ; 13L @ 3000H
+      18/       0 :                     
+      19/       0 :                     ; Memory mapped stuff other than ROMs:
+      20/       0 :                     ;
+      21/       0 :                     ; Shell (bombs) RAM 	1C00H - 1CFFH (low nibble 3F, high 2F)
+      22/       0 :                     ; BG color RAM	      	1800H - 1BFFH with PSU FLAG = 0 (low nibble only 3C)
+      23/       0 :                     ; BG (character) RAM  	1800H - 1BFFH with PSU FLAG = 1 (low nibble 2C, high 1C)
+      24/       0 :                     ; Program RAM        	1400H - 14FFH  (low nibble 13F, high 13G)
+      25/       0 :                     ; 2636 PVI 8F	      	1500H - 15FFH
+      26/       0 :                     
+      27/       0 :                     ; I/O read map:
+      28/       0 :                     ;
+      29/       0 :                     ; redd - clears collision detection 
+      30/       0 :                     ; redc - reads collision detection @ 7L
+      31/       0 :                     ; etxended: (bits 0 to 5 valid only)
+      32/       0 :                     ; 0H = inputs 0 
+      33/       0 :                     ; 2H = inputs 1 
+      34/       0 :                     ; 6H = DIP switches @ 3N
+      35/       0 :                     ; 7H = DIP switches @ 2N
+      36/       0 :                     
+      37/       0 :                     ; I/O write map:
+      38/       0 :                     ;
+      39/       0 :                     ; wrtd - sounds (3L latch, bits 0 to 5)
+      40/       0 :                     ; wrtc - latch at 2L 
+      41/       0 :                     ;	 bit 5 = STON (starfield enable)
+      42/       0 :                     ;        bit 4 = sound 8
+      43/       0 :                     ;        bit 3 = sound 7
+      44/       0 :                     ;        bit 2,1,0 = transitor bases (coin counters)
+      45/       0 :                     ;
+      46/       0 :                     
+      47/       0 :                     ; The first 32 bytes on the BG ram aren't displayed, so we can use them as general purpose
+      48/       0 :                     ; RAM: 1800H to 181FH 
+      49/       0 :                     ; It also seems that only 29 chars of each row are actually displayed
+      50/       0 :                     ; "first" row of text begins at 1BE0H, second at 1BE1H etc..
+      51/       0 :                     
+      52/       0 :                     	relaxed on
+      53/       0 :                     	page 	0
+      54/       0 :                     	cpu	2650
+      55/       0 :                     	org 	0
+      56/       0 :                     
+      57/       0 :                     reset:
+      58/       0 : 04 20               	lodi,r0 H'20'	; mask to disable interrupts
+      59/       2 : 92                  	lpsu		; disables interrupts 
+      60/       3 : 20                  	eorz r0		; r0 XOR r0 = clears the register  
+      61/       4 : 93                  	lpsl		; clears status low
+      62/       5 : 77 02               	ppsl H'02'	; set to unsigned logic compare
+      63/       7 : C1                  	strz r1		; clears r1
+      64/       8 :                     
+      65/       8 :                     
+      66/       8 :                     ; clears the sprites of PVIs
+      67/       8 :                     
+      68/       8 : CD 75 00            clrpvi:	stra,r0 H'1500',r1
+      69/       B : D9 7B               	birr,r1 clrpvi
+      70/       D :                     
+      71/       D :                     
+      72/       D :                     ; initial diag outputs are the screen shifter latches	
+      73/       D :                     ;	lodi,r2 H'FF'		; set all latch bits to 1
+      74/       D :                     ;	wrte,r2 H'00'
+      75/       D :                     
+      76/       D :                     ; clears "background" RAM
+      77/       D :                     
+      78/       D : 76 40               	ppsu H'40'		; to access the char ram, flag must be 1
+      79/       F : 04 F0               	lodi,r0 H'f0'
+      80/      11 : 3F 00 2D            	bsta,un fill
+      81/      14 :                     
+      82/      14 :                     ; makes a static diagonal "shell" pattern
+      83/      14 :                     
+      84/      14 : 20                  	eorz,r0
+      85/      15 : 01                  	lodz,r1
+      86/      16 : CC 7C 00            fixsh:	stra,r0 H'1C00',r0
+      87/      19 : D8 7B               	birr,r0 fixsh
+      88/      1B : 3F 00 55            	bsta,un wfinp		; wait for player 1 pressed
+      89/      1E :                     
+      90/      1E :                     ; the following makes a shifting pattern
+      91/      1E : 20                  	eorz,r0
+      92/      1F : 01                  	lodz,r1
+      93/      20 : B4 80               vsy:	tpsu H'80'		; attempt to start in the vertical retrace
+      94/      22 : 98 7C               	bcfr,eq vsy
+      95/      24 : CD 3C 00            shpt:	stra,r0 H'1C00',r1,+
+      96/      27 : D8 7B               	birr,r0 shpt
+      97/      29 : 85 01               	addi,r1 H'01'
+      98/      2B : 1B 73               	bctr,un vsy		; and loops forever
+      99/      2D :                     
+     100/      2D :                     ; subroutines
+     101/      2D :                     
+     102/      2D : CD 38 00            fill:	stra,r0 H'1800',r1,+
+     103/      30 : CD 79 00            	stra,r0 H'1900',r1
+     104/      33 : CD 7A 00            	stra,r0 H'1A00',r1
+     105/      36 : CD 7B 00            	stra,r0 H'1B00',r1
+     106/      39 : 59 72               	brnr,r1 fill
+     107/      3B : 17                  	retc,un
+     108/      3C :                     
+     109/      3C :                     
+     110/      3C :                     hexadj:
+     111/      3C : 44 0F               	andi,r0 H'0F'
+     112/      3E : 84 60               	addi,r0 H'60'
+     113/      40 : E4 6A               	comi,r0 H'6A'
+     114/      42 : 1A 02               	bctr,lt stlow
+     115/      44 : A4 29               	subi,r0 H'29'
+     116/      46 : 17                  stlow:	retc,un
+     117/      47 :                     
+     118/      47 : 50                  rot0:	rrr,r0
+     119/      48 : 50                  	rrr,r0
+     120/      49 : 50                  	rrr,r0
+     121/      4A : 50                  	rrr,r0
+     122/      4B : 3B 6F               	bstr,un hexadj
+     123/      4D : 17                  	retc,un
+     124/      4E :                     
+     125/      4E :                     
+     126/      4E :                     inpck:
+     127/      4E : 56 00               	rede,r2 H'00'		; read input col. 0
+     128/      50 : 46 20               	andi,r2 H'20'		; mask bit 5 (fire)
+     129/      52 : 18 7A               	bctr,eq inpck		; if is pressed, we wait
+     130/      54 : 17                  	retc,un
+     131/      55 :                     wfinp:
+     132/      55 : 56 00               	rede,r2 H'00'		; read input col. 0
+     133/      57 : 46 01               	andi,r2 H'01'		; mask bit 0 (player 1)
+     134/      59 : 98 7A               	bcfr,eq wfinp		; if is NOT pressed, we wait
+     135/      5B : 56 00               wfrl:	rede,r2 H'00'
+     136/      5D : 46 01               	andi,r2 H'01'		
+     137/      5F : 18 7A               	bctr,eq wfrl		; wait for release
+     138/      61 : 17                  	retc,un
+     139/      62 :                     
+     140/      62 :                     
+     141/      62 :                     
+     142/      62 :                     ; not all letters are available! 
+     143/      62 :                     ; space is 3Fh
+     144/      62 :                     ; numbers start at 60h
+     145/      62 :                     
+     146/      62 : 47 41 4C 41 3F 44   welc:	db "GALA",H'3F',"DIAG",H'3F',H'68',"DWF\0"
+               68 : 49 41 47 3F 68 44 
+               6E : 57 46 00          
+     147/      71 : 52 41 4D 00         ram:	db "RAM\0"
+     148/      75 : 52 4F 4D 00         rom:	db "ROM\0"
+     149/      79 : 43 50 3F 00         cpu:	db "CP",H'3F',H'00'
+     150/      7D : 3F 43 4C 3F 00      cll:	db H'3F',"CL",H'3F',H'00'
+     151/      82 : 42 47 3F 00         bg:	db "BG",H'3F',H'00'
+     152/      86 : 43 4F 3F 00         col:	db "CO",H'3F',H'00'
+     153/      8A : 53 48 3F 00         shel:	db "SH",H'3F',H'00'
+     154/      8E : 3F 47 44 00         ok:	db H'3F',"GD",H'00'
+     155/      92 : 3F 42 3F 00         bits:	db H'3F',"B",H'3F',H'00'
+     156/      96 : 3F 4F 3F 00         offs:	db H'3F',"O",H'3F',H'00'
+     157/      9A : 61 60 48 00         tenh:	db H'61',H'60',"H\0"
+     158/      9E : 61 61 48 00         eleh:	db H'61',H'61',"H\0"
+     159/      A2 : 61 63 48 00         thih:	db H'61',H'63',"H\0"
+     160/      A6 : 68 49 00            eigi:	db H'68',"I\0"
+     161/      A9 : 61 60 49 00         teni:	db H'61',H'60',"I\0"
+     162/      AD : 61 61 49 00         elei:	db H'61',H'61',"I\0"
+     163/      B1 : 61 63 49 00         thii:	db H'61',H'63',"I\0"
+     164/      B5 : 61 61 4C 00         elel:	db H'61',H'61',"L\0"
+     165/      B9 : 61 63 4C 00         thil:	db H'61',H'63',"L\0"
+     166/      BD :                     
+ AS V1.42 Beta [Bld 230] - Source File diag_awshell.asm - Page 2 - 11/06/2025 06:58:21 PM
+
+
+  Symbol Table (* = unused):
+  --------------------------
+
+*ARCHITECTURE :                                      "x86_64-unknown-linux" - |
+*BG :                            82 C | *BITS :                          92 C |
+*CASESENSITIVE :                  0 - | *CLL :                           7D C |
+ CLRPVI :                         8 C | *COL :                           86 C |
+*COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
+*CPU :                           79 C | *DATE :                "11/06/2025" - |
+*EIGI :                          A6 C | *ELEH :                          9E C |
+*ELEI :                          AD C | *ELEL :                          B5 C |
+*FALSE :                          0 - |  FILL :                          2D C |
+ FIXSH :                         16 C | *HAS64 :                          1 - |
+ HEXADJ :                        3C C |  INPCK :                         4E C |
+*LISTON :                         1 - | *MACEXP :                         7 - |
+*MOMCPU :                      2650 - | *MOMCPUNAME :                "2650" - |
+*NESTMAX :                      100 - | *OFFS :                          96 C |
+*OK :                            8E C | *RAM :                           71 C |
+*RELAXED :                        1 - | *RESET :                          0 C |
+*ROM :                           75 C | *ROT0 :                          47 C |
+*SHEL :                          8A C |  SHPT :                          24 C |
+ STLOW :                         46 C | *TENH :                          9A C |
+*TENI :                          A9 C | *THIH :                          A2 C |
+*THII :                          B1 C | *THIL :                          B9 C |
+*TIME :               "06:58:21 PM" - | *TRUE :                           1 - |
+*VERSION :                     142F - |  VSY :                           20 C |
+*WELC :                          62 C |  WFINP :                         55 C |
+ WFRL :                          5B C |
+
+     48 symbols
+     38 unused symbols
+
+ AS V1.42 Beta [Bld 230] - Source File diag_awshell.asm - Page 3 - 11/06/2025 06:58:21 PM
+
+
+  Code Pages:
+  ----------
+
+STANDARD (0 changed characters)
+
+1 code page
+
+0.00 seconds assembly time
+
+    166 lines source file
+      2 passes
+      0 errors
+      0 warnings
