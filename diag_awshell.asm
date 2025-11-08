@@ -2,7 +2,7 @@
 ; this code only tests the "shell" (alien's bombs) RAM and
 ; display circuitry.
 ; IZ8DWF 2022 - 2025
-; rev. 0.1
+; rev. 0.2
 	
 ; This code needs to go in position 8H (mapped at 0000H)
 ; the other ROMs are mapped as follows:
@@ -42,7 +42,7 @@
 ;        bit 4 = sound 8
 ;        bit 3 = sound 7
 ;        bit 2,1,0 = transitor bases (coin counters)
-;
+; extended -> DO NOT USE 
 
 ; The first 32 bytes on the BG ram aren't displayed, so we can use them as general purpose
 ; RAM: 1800H to 181FH 
@@ -63,15 +63,11 @@ reset:
 	strz r1		; clears r1
 
 
-; clears the sprites of PVIs
+; clears the sprites of PVI
 
 clrpvi:	stra,r0 H'1500',r1
 	birr,r1 clrpvi
 
-
-; initial diag outputs are the screen shifter latches	
-;	lodi,r2 H'FF'		; set all latch bits to 1
-;	wrte,r2 H'00'
 
 ; clears "background" RAM
 
@@ -93,8 +89,9 @@ fixsh:	stra,r0 H'1C00',r0
 vsy:	tpsu H'80'		; attempt to start in the vertical retrace
 	bcfr,eq vsy
 shpt:	stra,r0 H'1C00',r1,+
-	birr,r0 shpt
+	birr,r0 vsy
 	addi,r1 H'01'
+	bsta,un inpck		; waits if fire is pressed
 	bctr,un vsy		; and loops forever
 
 ; subroutines

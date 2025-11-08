@@ -26,7 +26,7 @@ change from a static pattern to a moving one.
 3) `diag_awshell`
 
 Same test as `diag_shell` but for the Astro War PCB that has different memory
-mapping. 
+mapping. Moving pattern can be freezed by holding down the fire button.
 
 For further information,
 read the .asm files ;-)
