@@ -2,7 +2,7 @@
 ; this code only tests the "shell" (alien's bombs) RAM and
 ; display circuitry.
 ; IZ8DWF 2022 - 2025
-; rev. 0.2
+; rev. 0.4
 	
 ; This code needs to go in position 8H (mapped at 0000H)
 ; the other ROMs are mapped as follows:
@@ -18,11 +18,11 @@
 
 ; Memory mapped stuff other than ROMs:
 ;
-; Shell (bombs) RAM 	1C00H - 1CFFH (low nibble 3F, high 2F)
-; BG color RAM	      	1800H - 1BFFH with PSU FLAG = 0 (low nibble only 3C)
-; BG (character) RAM  	1800H - 1BFFH with PSU FLAG = 1 (low nibble 2C, high 1C)
 ; Program RAM        	1400H - 14FFH  (low nibble 13F, high 13G)
 ; 2636 PVI 8F	      	1500H - 15FFH
+; BG color RAM	      	1800H - 1BFFH with PSU FLAG = 0 (low nibble only 3C)
+; BG (character) RAM  	1800H - 1BFFH with PSU FLAG = 1 (low nibble 2C, high 1C)
+; Shell (bombs) RAM 	1C00H - 1CFFH (low nibble 3F, high 2F)
 
 ; I/O read map:
 ;
@@ -71,13 +71,16 @@ clrpvi:	stra,r0 H'1500',r1
 
 ; clears "background" RAM
 
+	cpsu H'40'		; to access the color ram, flag must be 0
+	lodi,r0 H'01'
+	bsta,un fill
 	ppsu H'40'		; to access the char ram, flag must be 1
 	lodi,r0 H'F0'
 	bsta,un fill
 
 ; makes a static diagonal "shell" pattern
 
-	eorz,r0
+diagn:	eorz,r0
 	lodz,r1
 fixsh:	stra,r0 H'1C00',r0
 	birr,r0 fixsh
@@ -86,13 +89,29 @@ fixsh:	stra,r0 H'1C00',r0
 ; the following makes a shifting pattern
 	eorz,r0
 	lodz,r1
+	lodz,r3
 vsy:	tpsu H'80'		; attempt to start in the vertical retrace
 	bcfr,eq vsy
-shpt:	stra,r0 H'1C00',r1,+
+	stra,r0 H'1C00',r1,+
 	birr,r0 vsy
 	addi,r1 H'01'
-	bsta,un inpck		; waits if fire is pressed
-	bctr,un vsy		; and loops forever
+chk:	bsta,un inpck		; checks P1 and fire buttons
+	comi,r3 H'00'
+	bctr,eq vsy		; seems P1 wasn't pressed
+	comi,r3 H'01'
+	bctr,eq vsync
+	comi,r3 H'02'
+	bctr,eq diagn
+	lodi,r3 H'00'
+	bctr,un vsy
+
+; the following makes a straight pattern
+vsync:	tpsu H'80'		; attempt to start in the vertical retrace
+	bcfr,eq vsync
+	stra,r0 H'1C00',r1
+	birr,r1 vsync
+	addi,r0 H'01'
+	bctr,un chk
 
 ; subroutines
 
@@ -119,11 +138,14 @@ rot0:	rrr,r0
 	bstr,un hexadj
 	retc,un
 
-
-inpck:
-	rede,r2 H'00'		; read input col. 0
+inpck:	rede,r2 H'00'		; read input col. 0
+	andi,r2 H'01'		; mask bit 0 (player 1)
+	bcfr,eq fire		; not pressed, next check fire
+	addi,r3 H'01'		; if pressed P1 then increment r3
+	retc,un			; and return
+fire:	rede,r2 H'00'		; read input col. 0
 	andi,r2 H'20'		; mask bit 5 (fire)
-	bctr,eq inpck		; if is pressed, we wait
+	bctr,eq fire		; if is pressed, we wait
 	retc,un
 wfinp:
 	rede,r2 H'00'		; read input col. 0
