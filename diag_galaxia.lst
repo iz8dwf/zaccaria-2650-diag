@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 1 - 10/25/2025 01:37:24 PM
+ AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 1 - 11/18/2025 09:53:15 PM
 
 
        1/       0 :                     ; Diagnostic 1Kbytes ROM for Zaccaria Galaxia arcade PCB
@@ -579,7 +579,7 @@
      574/     3E1 : 61 61 4C 00         elel:	db H'61',H'61',"L\0"
      575/     3E5 : 61 63 4C 00         thil:	db H'61',H'63',"L\0"
      576/     3E9 :                     
- AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 2 - 10/25/2025 01:37:24 PM
+ AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 2 - 11/18/2025 09:53:15 PM
 
 
   Symbol Table (* = unused):
@@ -593,7 +593,7 @@
  COL :                          3B2 C |  COLCYC :                        50 C |
 *COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
  CPBG :                         21B C |  CPRAM :                         C4 C |
- CPU :                          3A5 C | *DATE :                "10/25/2025" - |
+ CPU :                          3A5 C | *DATE :                "11/18/2025" - |
  EIGI :                         3D2 C |  ELEH :                         3CA C |
  ELEI :                         3D9 C |  ELEL :                         3E1 C |
  EXPR :                         383 C | *FALSE :                          0 - |
@@ -618,7 +618,7 @@
  SUM :                          27B C |  T20 :                          373 C |
  TENH :                         3C6 C |  TENI :                         3D5 C |
  THIH :                         3CE C |  THII :                         3DD C |
- THIL :                         3E5 C | *TIME :               "01:37:24 PM" - |
+ THIL :                         3E5 C | *TIME :               "09:53:15 PM" - |
 *TRUE :                           1 - |  TSTBG :                        201 C |
  TSTRAM :                        64 C | *VERSION :                     142F - |
  WELC :                         38E C |  WFINP :                        331 C |
@@ -628,7 +628,7 @@
      77 symbols
      19 unused symbols
 
- AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 3 - 10/25/2025 01:37:24 PM
+ AS V1.42 Beta [Bld 230] - Source File diag_galaxia.asm - Page 3 - 11/18/2025 09:53:15 PM
 
 
   Code Pages:
@@ -638,7 +638,7 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.01 seconds assembly time
+0.00 seconds assembly time
 
     576 lines source file
       2 passes

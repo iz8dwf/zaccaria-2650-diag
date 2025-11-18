@@ -29,5 +29,10 @@ Same test as `diag_shell` but for the Astro War PCB that has different memory
 mapping. Moving pattern can be freezed by holding down the fire button. Can
 switch between different patterns by pressing `Player 1`.
 
+4) `diag_awars` 
+
+Goes in socket `8H` of the Astrowars PCB, tests RAM spaces and prints ROM's
+checksums. It advances between tests by pressing "player 1" input.
+
 For further information,
 read the .asm files ;-)
