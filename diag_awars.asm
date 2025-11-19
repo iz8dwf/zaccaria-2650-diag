@@ -182,8 +182,8 @@ cpram:	loda,r0 H'0800',r1,+
 
 ; test the "shell" RAM, 256 bytes total
 ; 
-	lodi,r2 (shel>>8)&H'00FF'	; print CPU ram
-	lodi,r3 (shel&H'00FF')-1		; start address needs to be one byte before the actual string
+	lodi,r2 (shel>>8)&H'00FF'	
+	lodi,r3 (shel&H'00FF')-1	; start address needs to be one byte before the actual string
 	bsta,un stspos
 	lodi,r2 H'1B'
 	lodi,r3 H'E4'			; on 5th row
@@ -511,7 +511,7 @@ expr:	cpsl H'10'		; "old" registers again
 
 zersh:	eorz,r0
 	strz,r1
-wz:	stra,r0 H'1400',r1,+
+wz:	stra,r0 H'1C00',r1,+
 	brnr,r1 wz
 	retc,un
 

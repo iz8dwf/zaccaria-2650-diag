@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 230] - Source File diag_awars.asm - Page 1 - 11/18/2025 09:53:31 PM
+ AS V1.42 Beta [Bld 230] - Source File diag_awars.asm - Page 1 - 11/19/2025 10:09:01 AM
 
 
        1/       0 :                     ; Diagnostic 1Kbytes ROM for Zaccaria Astrowars arcade PCB
@@ -185,8 +185,8 @@
      182/      D8 :                     
      183/      D8 :                     ; test the "shell" RAM, 256 bytes total
      184/      D8 :                     ; 
-     185/      D8 : 06 03               	lodi,r2 (shel>>8)&H'00FF'	; print CPU ram
-     186/      DA : 07 70               	lodi,r3 (shel&H'00FF')-1		; start address needs to be one byte before the actual string
+     185/      D8 : 06 03               	lodi,r2 (shel>>8)&H'00FF'	
+     186/      DA : 07 70               	lodi,r3 (shel&H'00FF')-1	; start address needs to be one byte before the actual string
      187/      DC : 3F 01 A1            	bsta,un stspos
      188/      DF : 06 1B               	lodi,r2 H'1B'
      189/      E1 : 07 E4               	lodi,r3 H'E4'			; on 5th row
@@ -514,7 +514,7 @@
      511/     341 :                     
      512/     341 : 20                  zersh:	eorz,r0
      513/     342 : C1                  	strz,r1
-     514/     343 : CD 34 00            wz:	stra,r0 H'1400',r1,+
+     514/     343 : CD 3C 00            wz:	stra,r0 H'1C00',r1,+
      515/     346 : 59 7B               	brnr,r1 wz
      516/     348 : 17                  	retc,un
      517/     349 :                     
@@ -544,7 +544,7 @@
      539/     39C : 31 31 4C 00         elel:	db "11L\0"
      540/     3A0 : 31 33 4C 00         thil:	db "13L\0"
      541/     3A4 :                     
- AS V1.42 Beta [Bld 230] - Source File diag_awars.asm - Page 2 - 11/18/2025 09:53:31 PM
+ AS V1.42 Beta [Bld 230] - Source File diag_awars.asm - Page 2 - 11/19/2025 10:09:01 AM
 
 
   Symbol Table (* = unused):
@@ -558,7 +558,7 @@
  COL :                          36D C |  COLCYC :                        40 C |
 *COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
  CPBG :                         1D8 C |  CPRAM :                         A2 C |
- CPU :                          360 C | *DATE :                "11/18/2025" - |
+ CPU :                          360 C | *DATE :                "11/19/2025" - |
  EIGI :                         38D C |  ELEH :                         385 C |
  ELEI :                         394 C |  ELEL :                         39C C |
  EXPR :                         33E C | *FALSE :                          0 - |
@@ -583,7 +583,7 @@
  SUM :                          234 C |  T20 :                          32E C |
  TENH :                         381 C |  TENI :                         390 C |
  THIH :                         389 C |  THII :                         398 C |
- THIL :                         3A0 C | *TIME :               "09:53:31 PM" - |
+ THIL :                         3A0 C | *TIME :               "10:09:01 AM" - |
 *TRUE :                           1 - |  TSTBG :                        1BE C |
  TSTRAM :                        54 C | *VERSION :                     142F - |
  WELC :                         349 C |  WFINP :                        2EA C |
@@ -593,7 +593,7 @@
      77 symbols
      19 unused symbols
 
- AS V1.42 Beta [Bld 230] - Source File diag_awars.asm - Page 3 - 11/18/2025 09:53:31 PM
+ AS V1.42 Beta [Bld 230] - Source File diag_awars.asm - Page 3 - 11/19/2025 10:09:01 AM
 
 
   Code Pages:
